@@ -10,6 +10,23 @@
   </head>
 
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <% if trader_signed_in? %>
+      <h4>Welcome, <%= current_trader.username %>! | <%= link_to 'Logout', destroy_trader_session_path, method: :delete %>  </h4>
+    <% else %>
+    <div class="nav">
+      <div>
+          <%= link_to 'Sign In', new_trader_session_path, method: :get %>
+      </div>
+      <div>
+          <%= link_to 'Sign Up', new_trader_registration_path, method: :get %>
+      </div>
+      <div class="about">        
+          <%= link_to 'About', new_trader_registration_path, method: :get %>
+      </div> 
+  </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

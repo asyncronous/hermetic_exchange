@@ -1,2 +1,19 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div>
+    <h1>The Hermetic Exchange</h1>
+</div>
+<% if !trader_signed_in? %>
+    <div>
+        <div>
+            <%= link_to 'Sign In', new_trader_session_path, method: :get %>
+        </div>
+        <div>
+            <%= link_to 'Sign Up', new_trader_registration_path, method: :get %>
+        </div>
+    </div>
+<% end %>
+<div>
+    <h2>The Infinite Rift Calls You...</h2>
+</div>
+<div>
+    <p>Placeholder for Video</p>
+</div>
