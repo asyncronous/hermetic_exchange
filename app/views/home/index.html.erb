@@ -2,14 +2,14 @@
     <h1>The Hermetic Exchange</h1>
 </div>
 <% if !trader_signed_in? %>
-    <div>
-        <div>
-            <%= link_to 'Sign In', new_trader_session_path, method: :get %>
-        </div>
-        <div>
-            <%= link_to 'Sign Up', new_trader_registration_path, method: :get %>
-        </div>
+  <nav class="nav">
+    <div class="nav-link">
+      <%= link_to 'Sign In', new_trader_session_path, method: :get %>
     </div>
+    <div class="nav-link">
+      <%= link_to 'Sign Up', new_trader_registration_path, method: :get %>
+    </div>
+  </nav>
 <% end %>
 <div>
     <h2>The Infinite Rift Calls You...</h2>

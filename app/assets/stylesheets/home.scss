@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.class{
-    
+.nav{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-cont{
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-link{
+    margin: 2px;
 }
