@@ -4,16 +4,42 @@
 <% if !trader_signed_in? %>
   <nav class="nav">
     <div class="nav-link">
-      <%= link_to 'Sign In', new_trader_session_path, method: :get %>
-    </div>
-    <div class="nav-link">
-      <%= link_to 'Sign Up', new_trader_registration_path, method: :get %>
+      <%= link_to 'Sign In', new_trader_session_path, method: :get %> <%= link_to 'Sign Up', new_trader_registration_path, method: :get %>
     </div>
   </nav>
-<% end %>
-<div>
+  <div>
     <h2>The Infinite Rift Calls You...</h2>
-</div>
-<div>
+  </div>
+  <div>
     <p>Placeholder for Video</p>
-</div>
+  </div>
+
+<% else %>
+  <%= render 'nav' %>  
+  <div class="dash-body">
+    <div class="profile">
+        <div>
+            <h2>Dashboard</h2>
+        </div>
+        <div>
+            <i>Image</i>
+        </div>
+        <div>
+            <h3><%= current_trader.username %></h3>
+            <p>Lorem Ipsum Description</p>
+            <h4>Strongest Rift Closed: <%= current_trader.highest_rift_level %></h4>
+            <h4>No. of Rifts Closed: <%= current_trader.rifts_closed %></h4>
+            <h4>No. of Items Traded: <%= current_trader.items_traded %></h4>
+            <%= link_to 'Edit Profile', edit_trader_registration_path, method: :get %>
+        </div>
+    </div>
+    <div>
+        <h2>Market Listed Items</h2>
+
+    </div>
+    <div>
+        <h2>Equipped Items</h2>
+
+    </div>
+  </div>
+<% end %>

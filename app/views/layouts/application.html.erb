@@ -13,15 +13,22 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% if trader_signed_in? %>
-      <h4>Welcome, <%= current_trader.username %>! | <%= link_to 'Logout', destroy_trader_session_path, method: :delete %>  </h4>
+      <div class="nav-cont">
+        <nav class="nav">
+          <div class="nav-link">
+            Welcome <%= current_trader.username %>! | <%= link_to 'Logout', destroy_trader_session_path, method: :delete %>
+          </div>
+        </nav>
+        <div class="nav-link">        
+          <%= link_to 'About', new_trader_registration_path, method: :get %>
+        </div> 
+      </div>
+    
     <% else %>
     <div class="nav-cont">
       <nav class="nav">
         <div class="nav-link">
-          <%= link_to 'Sign In', new_trader_session_path, method: :get %>
-        </div>
-        <div class="nav-link">
-          <%= link_to 'Sign Up', new_trader_registration_path, method: :get %>
+          <%= link_to 'Sign In', new_trader_session_path, method: :get %> <%= link_to 'Sign Up', new_trader_registration_path, method: :get %>
         </div>
       </nav>
       <div class="nav-link">        
