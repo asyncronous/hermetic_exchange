@@ -3,7 +3,7 @@ class CreateRifts < ActiveRecord::Migration[6.0]
     create_table :rifts do |t|
       t.string :name
       t.integer :credits
-      t.references :trader, null: false, foreign_key: true
+      t.references :trader, foreign_key: true
 
       t.timestamps
     end

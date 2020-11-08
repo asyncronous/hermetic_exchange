@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_11_08_034516) do
     t.integer "listed_price"
     t.boolean "listed"
     t.boolean "equipped"
-    t.bigint "trader_id", null: false
+    t.bigint "trader_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "rift_id"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_11_08_034516) do
   create_table "rifts", force: :cascade do |t|
     t.string "name"
     t.integer "credits"
-    t.bigint "trader_id", null: false
+    t.bigint "trader_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["trader_id"], name: "index_rifts_on_trader_id"

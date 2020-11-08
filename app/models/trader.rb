@@ -9,6 +9,7 @@ class Trader < ApplicationRecord
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
   has_many :items
+  has_many :rifts
 
   def login
     @login || self.username || self.email

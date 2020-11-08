@@ -10,7 +10,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.integer :listed_price
       t.boolean :listed
       t.boolean :equipped
-      t.references :trader, null: false, foreign_key: true
+      t.references :trader, foreign_key: true
 
       t.timestamps
     end

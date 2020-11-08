@@ -10,7 +10,7 @@ class Item < ApplicationRecord
     attribute :listed, default: false
     attribute :equipped, default: false
 
-    belongs_to :rift
-    belongs_to :exchange
-    belongs_to :trader
+    belongs_to :rift, optional: true
+    belongs_to :exchange, optional: true
+    belongs_to :trader, optional: true
 end
