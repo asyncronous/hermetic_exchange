@@ -10,10 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_07_083245) do
+ActiveRecord::Schema.define(version: 2020_11_08_034516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exchanges", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.string "item_type"
+    t.string "rarity"
+    t.string "description"
+    t.integer "power"
+    t.integer "worth"
+    t.integer "listed_price"
+    t.boolean "listed"
+    t.boolean "equipped"
+    t.bigint "trader_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "rift_id"
+    t.bigint "exchange_id"
+    t.index ["exchange_id"], name: "index_items_on_exchange_id"
+    t.index ["rift_id"], name: "index_items_on_rift_id"
+    t.index ["trader_id"], name: "index_items_on_trader_id"
+  end
+
+  create_table "rifts", force: :cascade do |t|
+    t.string "name"
+    t.integer "credits"
+    t.bigint "trader_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["trader_id"], name: "index_rifts_on_trader_id"
+  end
 
   create_table "traders", force: :cascade do |t|
     t.string "username", default: "", null: false
@@ -33,4 +68,8 @@ ActiveRecord::Schema.define(version: 2020_11_07_083245) do
     t.index ["username"], name: "index_traders_on_username", unique: true
   end
 
+  add_foreign_key "items", "exchanges"
+  add_foreign_key "items", "rifts"
+  add_foreign_key "items", "traders"
+  add_foreign_key "rifts", "traders"
 end
