@@ -1,6 +1,3 @@
-<div>
-    <h1>The Hermetic Exchange</h1>
-</div>
 <% if !trader_signed_in? %>
   <nav class="nav">
     <div class="nav-link">
@@ -14,10 +11,9 @@
     <p>Placeholder for Video</p>
   </div>
 
-<% else %>
-  <%= render 'nav' %>  
+<% else %> 
   <div class="dash-body">
-    <div class="profile">
+    <div class="dash-cont">
         <div>
             <h2>Dashboard</h2>
         </div>
@@ -27,19 +23,45 @@
         <div>
             <h3><%= current_trader.username %></h3>
             <p>Lorem Ipsum Description</p>
+            <h4>Power: <%= @power_level %></h4>
             <h4>Strongest Rift Closed: <%= current_trader.highest_rift_level %></h4>
             <h4>No. of Rifts Closed: <%= current_trader.rifts_closed %></h4>
             <h4>No. of Items Traded: <%= current_trader.items_traded %></h4>
             <%= link_to 'Edit Profile', edit_trader_registration_path, method: :get %>
         </div>
     </div>
-    <div>
-        <h2>Market Listed Items</h2>
-
+    <div class="dash-cont">
+        <h3>Market Listed Items</h3>
+        <% current_trader.items.each do |item| %>
+          <% if item.listed == true %>
+            <div class="item-container">
+                <p>Name: <%= item.name %></p>
+                <p>Type: <%= item.item_type %></p>
+                <p>Rarity: <%= item.rarity %></p>
+                <p>Description:<%= item.description %></p>
+                <p>Power: <%= item.power %></p>
+                <p>Price: <%= item.listed_price %></p>
+            </div>
+          <% end %>
+        <% end %>
     </div>
-    <div>
-        <h2>Equipped Items</h2>
-
+    <div class="dash-cont">
+        <h3>Equipped Items</h3>
+        <% current_trader.items.each do |item| %>
+          <% if item.equipped == true %>
+            <div class="item-container">
+                <p>Name: <%= item.name %></p>
+                <p>Type: <%= item.item_type %></p>
+                <p>Rarity: <%= item.rarity %></p>
+                <p>Description:<%= item.description %></p>
+                <p>Power: <%= item.power %></p>
+                <p>Price: <%= item.listed_price %></p>
+            </div>
+          <% end %>
+        <% end %>
+        <div>
+          <%= link_to 'Edit Inventory', inventory_path, method: :get %>
+        </div>
     </div>
   </div>
 <% end %>

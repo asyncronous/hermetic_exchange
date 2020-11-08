@@ -1,0 +1,13 @@
+<h1>Exchange</h1>
+
+<% @exchange_listed.each do |item| %>
+    <div class="item-container">
+        <p>Owner: <%= item.trader.username %></p>
+        <p>Name: <%= item.name %></p>
+        <p>Type: <%= item.item_type %></p>
+        <p>Rarity: <%= item.rarity %></p>
+        <p>Description:<%= item.description %></p>
+        <p>Power: <%= item.power %></p>
+        <p>Price: <%= item.listed_price %></p>
+    </div>
+<% end %>
