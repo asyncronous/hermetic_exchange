@@ -12,8 +12,6 @@ Trader.destroy_all
 
 Exchange.create!(name: "Exchange")
 
-Trader.destroy_all
-
 user = Trader.create!(username: "user", email: "a@b.com", password: "111111", password_confirmation: "111111", credits: 100, highest_rift_level: 0, rifts_closed: 0, items_traded: 0)
 
 user.items.create
@@ -24,3 +22,7 @@ user.items.create
 user.rifts.create
 user.rifts.create
 user.rifts.create
+
+admin = Trader.create!(username: "admin", email: "admin@exchange.com", password: "password", password_confirmation: "password", credits: 1000000, highest_rift_level: 666, rifts_closed: 666, items_traded: 666)
+
+admin.add_role(:admin)

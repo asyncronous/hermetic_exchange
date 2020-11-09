@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_08_034516) do
+ActiveRecord::Schema.define(version: 2020_11_08_234922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(version: 2020_11_08_034516) do
     t.index ["trader_id"], name: "index_rifts_on_trader_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
   create_table "traders", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "email", default: "", null: false
@@ -66,6 +76,14 @@ ActiveRecord::Schema.define(version: 2020_11_08_034516) do
     t.index ["email"], name: "index_traders_on_email", unique: true
     t.index ["reset_password_token"], name: "index_traders_on_reset_password_token", unique: true
     t.index ["username"], name: "index_traders_on_username", unique: true
+  end
+
+  create_table "traders_roles", id: false, force: :cascade do |t|
+    t.bigint "trader_id"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_traders_roles_on_role_id"
+    t.index ["trader_id", "role_id"], name: "index_traders_roles_on_trader_id_and_role_id"
+    t.index ["trader_id"], name: "index_traders_roles_on_trader_id"
   end
 
   add_foreign_key "items", "exchanges"

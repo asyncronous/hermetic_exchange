@@ -6,16 +6,22 @@ Rails.application.routes.draw do
   resources :items
   resources :rifts
 
+  #buy item
+  put '/item/:id/buy', to: 'items#buy', as: 'items_buy'
+
+  get '/find_item', to: 'items#find', as: 'find_item'
+  get '/find', to: 'traders#find', as: 'find'
+
   #marketplace
-  get '/exchange', to: 'trader#exchange', as: 'exchange'
+  get '/exchange', to: 'traders#exchange', as: 'exchange'
   #exploretherift
-  get '/explore', to: 'trader#explore', as: 'explore'
+  get '/explore', to: 'traders#explore', as: 'explore'
   #inventory
-  get '/inventory', to: 'trader#inventory', as: 'inventory'
+  get '/inventory', to: 'traders#inventory', as: 'inventory'
   #messenger
-  get '/messenger', to: 'trader#messenger', as: 'messenger'
+  get '/messenger', to: 'traders#messenger', as: 'messenger'
   #search
-  get '/search', to: 'trader#search', as: 'search'
+  get '/search', to: 'traders#search', as: 'search'
   #dashboard/splash
   root to: 'home#index'
 end

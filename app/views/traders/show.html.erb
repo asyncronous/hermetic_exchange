@@ -1,0 +1,11 @@
+<h2>User Profile</h2>
+
+<% if @this_trader != nil %>
+    <h3><%= @this_trader.username %></h3>
+    <p>Lorem Ipsum Description</p>
+    <h4>Credits: <%= @this_trader.credits %></h4>
+
+    <h4>Strongest Rift Closed: <%= @this_trader.highest_rift_level %></h4>
+    <h4>No. of Rifts Closed: <%= @this_trader.rifts_closed %></h4>
+    <h4>No. of Items Traded: <%= @this_trader.items_traded %></h4>
+<% end %>

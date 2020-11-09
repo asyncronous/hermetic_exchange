@@ -1,4 +1,5 @@
 class Trader < ApplicationRecord
+  rolify
   attr_writer :login
   
   # Include default devise modules. Others available are:
@@ -6,10 +7,14 @@ class Trader < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  attribute :highest_rift_level, default: 0
+  attribute :rifts_closed, default: 0
+  attribute :items_traded, default: 0
+
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
-  has_many :items
-  has_many :rifts
+  has_many :items, dependent: :destroy
+  has_many :rifts, dependent: :destroy
 
   def login
     @login || self.username || self.email

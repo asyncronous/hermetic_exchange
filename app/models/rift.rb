@@ -9,7 +9,7 @@ class Rift < ApplicationRecord
 
   attribute :credits, default: 100
   
-  has_many :items
+  has_many :items, dependent: :destroy
   belongs_to :trader
 
   def set_items

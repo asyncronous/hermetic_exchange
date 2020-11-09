@@ -1,0 +1,22 @@
+<h1>Search Traders</h1>
+
+<%= form_with model: @trader, url: { action: "find" }, method: 'get', local: true do |f| %>
+<div>
+    <p>Find a Trader by their Username or Email<% f.label :login %><br />
+    <%= f.text_field :login, value: "..."%></p>
+</div>
+<div>
+    <%= f.submit "Search" %>
+</div>
+<% end %>
+
+<% if @searched_trader != nil %>
+    <h3><%= @searched_trader.username %></h3>
+    <p>Lorem Ipsum Description</p>
+    <h4>Credits: <%= @searched_trader.credits %></h4>
+
+    <h4>Strongest Rift Closed: <%= @searched_trader.highest_rift_level %></h4>
+    <h4>No. of Rifts Closed: <%= @searched_trader.rifts_closed %></h4>
+    <h4>No. of Items Traded: <%= @searched_trader.items_traded %></h4>
+    <%= link_to "Show Profile", trader_path(@searched_trader), method: :get %> </p>
+<% end %>

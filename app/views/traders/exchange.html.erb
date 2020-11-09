@@ -1,0 +1,46 @@
+<h1>Exchange</h1>
+
+<%= form_with model: @item, url: { controller: "items", action: "find" }, method: 'get', local: true do |f| %>
+<div>
+    <p>Find Items by their Name/Rarity/Type <% f.label :input %><br />
+    <%= f.text_field :input, value: "..."%></p>
+</div>
+<div>
+    <%= f.submit "Search Items" %>
+</div>
+<br>
+<% end %>
+
+<h2>User Listed</h2>
+<% if @searched_items %>
+<h2>Search Results:</h2>
+    <% @searched_items.each do |item| %>
+        <div class="item-container">
+            <p>Owner: <%= item.trader.username %></p>
+            <p>Name: <%= item.name %></p>
+            <p>Type: <%= item.item_type %></p>
+            <p>Rarity: <%= item.rarity %></p>
+            <p>Description:<%= item.description %></p>
+            <p>Power: <%= item.power %></p>
+            <p>Price: <%= item.listed_price %></p>
+            <button><%= link_to "Buy!", items_buy_path(item), method: "PUT", data: {confirm: "Are you sure?" } %></button>
+        </div>
+    <% end %>
+<% end %>
+
+<h2>Premium</h2>
+<% if @exchange_listed %>
+<!-- <h2>Premium</h2> -->
+    <% @exchange_listed.each do |item| %>
+        <div class="item-container">
+            <p>Owner: <%= item.trader.username %></p>
+            <p>Name: <%= item.name %></p>
+            <p>Type: <%= item.item_type %></p>
+            <p>Rarity: <%= item.rarity %></p>
+            <p>Description:<%= item.description %></p>
+            <p>Power: <%= item.power %></p>
+            <p>Price: <%= item.listed_price %></p>
+            <button><%= link_to "Buy!", items_buy_path(item), method: "PUT", data: {confirm: "Are you sure?" } %></button>
+        </div>
+    <% end %>
+<% end %>

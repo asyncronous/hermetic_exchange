@@ -23,6 +23,7 @@
         <div>
             <h3><%= current_trader.username %></h3>
             <p>Lorem Ipsum Description</p>
+            <h4>Credits: <%= current_trader.credits %></h4>
             <h4>Power: <%= @power_level %></h4>
             <h4>Strongest Rift Closed: <%= current_trader.highest_rift_level %></h4>
             <h4>No. of Rifts Closed: <%= current_trader.rifts_closed %></h4>
@@ -55,7 +56,6 @@
                 <p>Rarity: <%= item.rarity %></p>
                 <p>Description:<%= item.description %></p>
                 <p>Power: <%= item.power %></p>
-                <p>Price: <%= item.listed_price %></p>
             </div>
           <% end %>
         <% end %>
