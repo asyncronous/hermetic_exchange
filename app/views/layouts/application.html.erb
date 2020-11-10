@@ -20,7 +20,7 @@
           </div>
         </nav>
         <div class="nav-link">        
-          <%= link_to 'About', new_trader_registration_path, method: :get %>
+          <%= link_to 'Buy Credits', root_path, method: :get %> <%= link_to 'About', root_path, method: :get %>
         </div> 
       </div>
     
@@ -32,11 +32,11 @@
         </div>
       </nav>
       <div class="nav-link">        
-        <%= link_to 'Buy Credits', credits_path, method: :get %> <%= link_to 'About', about_path, method: :get %>
+        <%= link_to 'Buy Credits', root_path, method: :get %> <%= link_to 'About', root_path, method: :get %>
       </div> 
     </div>
     <% end %>
-    <div>
+    <div class="title">
       <h1>The Hermetic Exchange</h1>
     </div>
     <% if trader_signed_in? %>

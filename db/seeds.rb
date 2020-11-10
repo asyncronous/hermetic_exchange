@@ -5,10 +5,61 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Item.destroy_all
+ItemTypeConstructor.destroy_all
+ItemVariantConstructor.destroy_all
 Rift.destroy_all
+Item.destroy_all
 Exchange.destroy_all
 Trader.destroy_all
+
+constructors = [
+    {item_type: "dagger"},
+    {item_type: "sword"},
+    {item_type: "staff"},
+    {item_type: "wand"},
+    {item_type: "amulet"},
+    {item_type: "line"},
+    {item_type: "ring"},
+    {item_type: "orb"},
+    {item_type: "tome"},
+    {item_type: "elixir"}
+]
+
+ItemTypeConstructor.create!(constructors)
+
+ItemVariantConstructor.create!(
+    effects: [
+        "lightning",
+        "corrupton",
+        "divinity",
+        "agony",
+        "wisdom",
+        "petrification",
+        "banishment",
+        "sealing",
+        "fortune",
+        "fire",
+        "seeking",
+        "life"
+    ],
+    rarities: [
+        "common",
+        "rare",
+        "mythic"
+    ],
+    power: [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+    ]
+)
 
 Exchange.create!(name: "Exchange")
 

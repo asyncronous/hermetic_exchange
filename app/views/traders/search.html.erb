@@ -3,7 +3,7 @@
 <%= form_with model: @trader, url: { action: "find" }, method: 'get', local: true do |f| %>
 <div>
     <p>Find a Trader by their Username or Email<% f.label :login %><br />
-    <%= f.text_field :login, value: "..."%></p>
+    <%= f.text_field :login, placeholder: "..."%></p>
 </div>
 <div>
     <%= f.submit "Search" %>

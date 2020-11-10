@@ -3,7 +3,7 @@
 <%= form_with model: @item, url: { controller: "items", action: "find" }, method: 'get', local: true do |f| %>
 <div>
     <p>Find Items by their Name/Rarity/Type <% f.label :input %><br />
-    <%= f.text_field :input, value: "..."%></p>
+    <%= f.text_field :input, placeholder: "..."%></p>
 </div>
 <div>
     <%= f.submit "Search Items" %>

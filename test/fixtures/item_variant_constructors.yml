@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  effects: MyString
+  rarities: MyString
+  power: 1
+
+two:
+  effects: MyString
+  rarities: MyString
+  power: 1

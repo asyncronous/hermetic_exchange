@@ -1,13 +1,13 @@
 <% if !trader_signed_in? %>
-  <nav class="nav">
-    <div class="nav-link">
+  <nav class="title">
+    <div >
       <%= link_to 'Sign In', new_trader_session_path, method: :get %> <%= link_to 'Sign Up', new_trader_registration_path, method: :get %>
     </div>
   </nav>
-  <div>
+  <div class="title">
     <h2>The Infinite Rift Calls You...</h2>
   </div>
-  <div>
+  <div class="title">
     <p>Placeholder for Video</p>
   </div>
 

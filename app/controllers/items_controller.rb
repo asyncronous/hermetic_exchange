@@ -2,6 +2,9 @@ class ItemsController < ApplicationController
     def update
         @item = Item.find(params[:id])
         par = item_params
+        if par[:icon] != nil
+            @item.update(icon: par[:icon])
+        end
 
         if par[:equipped_listed] == "equipped"
             @item.update(equipped: true, listed: false, exchange: nil, listed_price: par[:listed_price])
@@ -38,8 +41,16 @@ class ItemsController < ApplicationController
         end
     end
 
+    def destroy
+        @item = Item.find(params[:id])
+        current_trader.update(credits: current_trader.credits + @item.worth)
+        flash[:notice] = "Item dismantled! Gained #{@item.worth} Credits!"
+        @item.destroy
+        redirect_to inventory_path
+    end
+
     private
     def item_params
-        params.require(:item).permit(:listed_price, :equipped_listed, :trader_id, :input)
+        params.require(:item).permit(:listed_price, :equipped_listed, :trader_id, :input, :icon)
     end
 end

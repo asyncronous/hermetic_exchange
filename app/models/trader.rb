@@ -15,6 +15,7 @@ class Trader < ApplicationRecord
 
   has_many :items, dependent: :destroy
   has_many :rifts, dependent: :destroy
+  has_one_attached :avatar
 
   def login
     @login || self.username || self.email

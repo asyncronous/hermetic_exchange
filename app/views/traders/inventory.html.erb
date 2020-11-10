@@ -3,14 +3,22 @@
         <h1>Inventory</h1>
         <% @items.each do |item| %>
             <div class="item-container">
+                <% if item.icon.attached? %>
+                <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+                <% end %>
                 <p>Name: <%= item.name %></p>
                 <p>Type: <%= item.item_type %></p>
                 <p>Rarity: <%= item.rarity %></p>
                 <p>Description:<%= item.description %></p>
                 <p>Power: <%= item.power %></p>
                 <p>Worth: <%= item.worth %></p>
-                <p>Equipped: <%= item.equipped  %></p>
+                
+                <!-- <p>Equipped: <%= item.equipped  %></p> -->
                 <%= form_with model: item, local: true do |f| %>
+                <div>
+                    <%= f.label :icon %>
+                    <%= f.file_field :icon %>
+                </div>
                 <div>
                     <%= f.label :listed_price %>
                     <%= f.number_field :listed_price, min: 100 %>
@@ -22,12 +30,15 @@
                     <br>
                     None: <%= f.radio_button :equipped_listed, :none %>
                 </div>
+                <br>
                 <div>
                     <%= f.submit %>
                 </div>
                 <% end %>
-
-                <p>On Exchange?: <%= item.listed %></p>
+                <br>
+                <div>
+                    <button><%= link_to "Dismantle for Credits", item_path(item), method: :delete, data: {confirm: "Are you sure?" } %></button>
+                </div>
             </div>
         <% end %>
     </div>
@@ -35,6 +46,7 @@
         <div>
             <h3><%= current_trader.username %></h3>
             <p>Lorem Ipsum Description</p>
+            <h4>Credits: <%= current_trader.credits %></h4>
             <h4>Strongest Rift Closed: <%= current_trader.highest_rift_level %></h4>
             <h4>Power Level: <%= @power_level %></h4>
             <h4>No. of Rifts Closed: <%= current_trader.rifts_closed %></h4>
