@@ -1,0 +1,34 @@
+<div class="rift-cont">
+ <section>
+     <div>
+         <h2>Explore The Rift</h2>
+     </div>
+     <div>
+         <h3>Claim Daily Reward</h3>
+         <p>Item</p>
+         <p>Credits</p>
+     </div>
+     <div>
+         <h3>Select Rift</h3>
+         <% int = 1 %>
+         <% @rifts.each do |rift| %>
+            <div>
+                <h4><%= "Rift " + int.to_s  %></h4>
+                <% int += 1 %>
+                <% item_int = 1 %>
+                <% rift.items.each do |item| %>
+                    <%= "Item #{item_int}: #{item.name}"%>
+                    <br>
+                    Power: <%= item.power %>
+                    Worth: <%= item.worth %>
+                    <br><br>
+                    <% item_int += 1 %>
+                <% end %>
+                Credits: <%= rift.credits %>
+            </div>
+
+         <% end %>
+     </div>
+
+ </section>
+</div>

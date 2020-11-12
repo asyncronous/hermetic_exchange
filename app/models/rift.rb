@@ -16,5 +16,6 @@ class Rift < ApplicationRecord
     self.items.create
     self.items.create
     self.items.create
+    self.credits = rand()
   end
 end

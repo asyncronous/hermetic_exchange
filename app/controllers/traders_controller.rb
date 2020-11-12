@@ -14,6 +14,9 @@ class TradersController < ApplicationController
   #rifts
   def explore
     if trader_signed_in?
+      if current_trader.closed_a_rift
+
+
       @rifts = current_trader.rifts
     end
   end
@@ -61,18 +64,12 @@ class TradersController < ApplicationController
     end
   end
 
-  def sort
-    redirect_to inventory_path(passed_param: item_params[:sort])
-  end
-
   def show
     @this_trader = Trader.find(params[:id])
   end
 
   private
-
-  def item_params
-    p params
-    params.permit(:sort)
+  def trader_params
+    params.require(:trader).permit(:login)
   end
 end
