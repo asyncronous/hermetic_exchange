@@ -16,7 +16,11 @@
 <h2>Search Results:</h2>
     <% @searched_items.each do |item| %>
         <div class="item-container">
-            <p>Owner: <%= item.trader.username %></p>
+            <p>Owner: <%= link_to item.trader.username, trader_path(item.trader), method: :get %></p>
+            <br>
+            <% if item.icon.attached? %>
+            <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+            <% end %>
             <p>Name: <%= item.name %></p>
             <p>Type: <%= item.item_type %></p>
             <p>Rarity: <%= item.rarity %></p>
@@ -33,7 +37,7 @@
 <!-- <h2>Premium</h2> -->
     <% @exchange_listed.each do |item| %>
         <div class="item-container">
-            <p>Owner: <%= item.trader.username %></p>
+            <!-- <p>Owner: <%= item.trader.username %></p> -->
             <p>Name: <%= item.name %></p>
             <p>Type: <%= item.item_type %></p>
             <p>Rarity: <%= item.rarity %></p>

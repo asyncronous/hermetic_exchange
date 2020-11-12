@@ -41,6 +41,8 @@ class Item < ApplicationRecord
             self.power = var_constructor.power.sample
             self.worth = self.power * 100
             self.listed_price = self.worth
+        else
+            self.listed = true
         end
     end
 end

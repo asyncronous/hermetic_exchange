@@ -29,9 +29,12 @@
             <h4>No. of Rifts Closed: <%= current_trader.rifts_closed %></h4>
             <h4>No. of Items Traded: <%= current_trader.items_traded %></h4>
             <%= link_to 'Edit Profile', edit_trader_registration_path, method: :get %>
+            <br>
             <% if current_trader.has_role?(:admin) %>
-            <%= link_to 'Create Item Variants', items_new_variant_path, method: :get %>
-            <%= link_to 'Create Premium Items', items_new_premium_path, method: :get %>
+              <%= link_to 'Create Item Variants', items_new_variant_path, method: :get %>
+              <br>
+              <%= link_to 'Create Premium Items', items_new_premium_path, method: :get %>
+              <br>
             <% end %>
         </div>
     </div>
@@ -40,6 +43,9 @@
         <% current_trader.items.each do |item| %>
           <% if item.listed == true %>
             <div class="item-container">
+                <% if item.icon.attached? %>
+                <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+                <% end %>
                 <p>Name: <%= item.name %></p>
                 <p>Type: <%= item.item_type %></p>
                 <p>Rarity: <%= item.rarity %></p>
@@ -55,6 +61,9 @@
         <% current_trader.items.each do |item| %>
           <% if item.equipped == true %>
             <div class="item-container">
+                <% if item.icon.attached? %>
+                <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+                <% end %>
                 <p>Name: <%= item.name %></p>
                 <p>Type: <%= item.item_type %></p>
                 <p>Rarity: <%= item.rarity %></p>
