@@ -38,6 +38,28 @@
             </div>
         <% end %>
     </div>
+    <div>
+        <%= form_with model: @items.first, url: { controller: "items", action: "sort" }, method: 'get', local: true do |f| %>
+        <div>
+            <p>Sort Inventory<% f.label :sort %><br />
+                Name: <%= f.radio_button :sort, :name %>
+                <br>
+                Rarity: <%= f.radio_button :sort, :rarity %>
+                <br>
+                Equipped: <%= f.radio_button :sort, :equipped %>
+                <br>
+                Listed: <%= f.radio_button :sort, :listed %>
+                <br>
+                Power: <%= f.radio_button :sort, :power %>
+                <br>
+                Worth: <%= f.radio_button :sort, :worth %>
+            </p>
+        </div>
+        <div>
+            <%= f.submit "Sort" %>
+        </div>
+        <% end %>
+    </div>
     <div class="dash-cont">
         <div>
             <h3><%= current_trader.username %></h3>

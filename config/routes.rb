@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   #buy item
   put '/item/:id/buy', to: 'items#buy', as: 'items_buy'
 
+  get '/sort_inventory', to:'items#sort', as: 'sort_inventory'
   get '/find_item', to: 'items#find', as: 'find_item'
   get '/find', to: 'traders#find', as: 'find'
 

@@ -15,12 +15,24 @@ class Item < ApplicationRecord
     belongs_to :exchange, optional: true
     belongs_to :trader, optional: true
 
-    has_one_attached :icon
+    has_one_attached :icon, dependent: :purge
 
     def set_random_attributes
-        if !self.trader.has_role?(:admin)
+        trader_inst = nil
+
+        if self.trader
+            trader_inst = self.trader
+        end
+
+        if self.rift
+            trader_inst = rift.trader
+        end
+
+        type_constructors = ItemTypeConstructor.all
+
+        if !trader_inst.has_role?(:admin)
             var_constructor = ItemVariantConstructor.first
-            type_constructors = ItemTypeConstructor.all
+            # type_constructors = ItemTypeConstructor.all
             rand_type = type_constructors.sample
             self.name = rand_type.item_type + " of " + var_constructor.effects.sample
 
@@ -42,6 +54,22 @@ class Item < ApplicationRecord
             self.worth = self.power * 100
             self.listed_price = self.worth
         else
+            if type_constructors.exists?(item_type: self.item_type)
+                type = type_constructors.find_by item_type: self.item_type
+                image_io = type.icon.download
+                ct = type.icon.content_type
+                fn = type.icon.filename.to_s
+                ts = Time.now.to_i.to_s
+            
+                new_blob = ActiveStorage::Blob.create_and_upload!(
+                io: StringIO.new(image_io),
+                filename: ts + '_' + fn,
+                content_type: ct,
+                )
+
+                self.icon.attach(new_blob)
+            end
+            
             self.listed = true
         end
     end

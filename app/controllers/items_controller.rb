@@ -49,6 +49,10 @@ class ItemsController < ApplicationController
         redirect_to inventory_path
     end
 
+    def sort
+        redirect_to inventory_path(passed_param: item_sort_params[:sort])
+    end
+
     def buy
         @item = Item.find(params[:id])
         curr_owner = @item.trader
@@ -96,6 +100,10 @@ class ItemsController < ApplicationController
     
     def item_params
         params.require(:item).permit(:listed_price, :equipped_listed, :trader_id, :input, :icon)
+    end
+
+    def item_sort_params
+        params.require(:item).permit(:sort)
     end
 
     def item_type_params

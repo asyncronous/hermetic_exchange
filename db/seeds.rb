@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Item.destroy_all
 ItemTypeConstructor.destroy_all
 ItemVariantConstructor.destroy_all
 Rift.destroy_all
-Item.destroy_all
 Exchange.destroy_all
 Trader.destroy_all
 
@@ -77,3 +77,5 @@ user.rifts.create
 admin = Trader.create!(username: "admin", email: "admin@exchange.com", password: "password", password_confirmation: "password", credits: 1000000, highest_rift_level: 666, rifts_closed: 666, items_traded: 666)
 
 admin.add_role(:admin)
+
+admin.items.create(name: "staff of horror", item_type: "staff", rarity: "premium", description: "Lorem Ipsum", power: 666, worth: 66666, listed_price: 66666, listed: true, exchange: Exchange.first)

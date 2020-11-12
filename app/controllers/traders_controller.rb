@@ -21,13 +21,18 @@ class TradersController < ApplicationController
   #inventory
   def inventory
     if trader_signed_in?
-      @items = current_trader.items.order(:name)
+      if params[:passed_param] != nil
+        @items = current_trader.items.order(params[:passed_param])
+      else
+        @items = current_trader.items.order(:name)
+      end
       @power_level = 0
       @items.each do |item|
         if item.equipped == true
           @power_level += item.power
         end
       end
+
     end
   end
 
@@ -56,12 +61,18 @@ class TradersController < ApplicationController
     end
   end
 
+  def sort
+    redirect_to inventory_path(passed_param: item_params[:sort])
+  end
+
   def show
     @this_trader = Trader.find(params[:id])
   end
 
   private
-  def trader_params
-    params.require(:trader).permit(:login)
+
+  def item_params
+    p params
+    params.permit(:sort)
   end
 end
