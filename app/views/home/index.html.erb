@@ -31,7 +31,7 @@
             <%= link_to 'Edit Profile', edit_trader_registration_path, method: :get %>
             <% if current_trader.has_role?(:admin) %>
             <%= link_to 'Create Item Variants', items_new_variant_path, method: :get %>
-            <%= link_to 'Create Premium Items', edit_trader_registration_path, method: :get %>
+            <%= link_to 'Create Premium Items', items_new_premium_path, method: :get %>
             <% end %>
         </div>
     </div>
@@ -70,7 +70,7 @@
   </div>
 <% end %>
 
-<% ItemTypeConstructor.all.each do |item| %>
+<!-- <% ItemTypeConstructor.all.each do |item| %>
 
 <% if item.icon.attached? %>
 <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
@@ -89,4 +89,4 @@
 <p>Powers:</p>
 <% ItemVariantConstructor.first.power.each do |power| %>
  <%= power %>
-<% end %>
+<% end %> -->

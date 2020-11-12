@@ -1,0 +1,40 @@
+<h2> Creat new item Variants or Types</h2>
+
+<%= form_with model: @item, url: { controller: "items", action: "create_premium" }, local: true do |f| %>
+<div>
+    <%= f.label :icon %>
+    <%= f.file_field :icon %>
+    <br>
+    
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: "dagger of pestilence" %>
+    <br>
+
+    <%= f.label :item_type %>
+    <%= f.text_field :item_type, placeholder: "dagger" %>
+    <br>
+
+    <%= f.label :rarity %>
+    <%= f.text_field :rarity, value: "premium" %>
+    <!-- <br> -->
+
+    <%= f.label :description %>
+    <%= f.text_field :description, placeholder: "Lorem Ipsum" %>
+    <br>
+
+    <%= f.label :power %>
+    <%= f.number_field :power, value: 100 %>
+    <br>
+
+    <%= f.label :worth %>
+    <%= f.number_field :worth, value: 10000 %>
+    <br>
+
+    <%= f.label :listed_price %>
+    <%= f.number_field :listed_price, value: 10000 %>
+</div>
+<br>
+<div>
+    <%= f.submit %>
+</div>
+<% end %>

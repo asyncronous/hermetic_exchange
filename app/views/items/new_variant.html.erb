@@ -13,14 +13,14 @@
     <%= f.submit %>
 </div>
 <% end %>
-
+<br>
 <%= form_with model: @item_variant, url: { controller: "items", action: "create_variant" }, local: true do |f| %>
 <div>
     <%= f.label :effect %>
     <%= f.text_field :effect, placeholder: "frost" %>
     <%= f.label :rarity %>
     <%= f.text_field :rarity, placeholder: "unique" %>
-    <%= f.label :effect %>
+    <%= f.label :power %>
     <%= f.number_field :power, placeholder: 1 %>
 
 </div>

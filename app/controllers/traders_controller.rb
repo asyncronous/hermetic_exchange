@@ -4,7 +4,7 @@ class TradersController < ApplicationController
   #marketplace
   def exchange
     @item = Item.new
-    # @exchange_listed = Exchange.first.items
+    @exchange_listed = Exchange.first.items.where(rarity: "premium")
 
     if params[:passed_param] != nil
         @searched_items = Item.find(params[:passed_param])

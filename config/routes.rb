@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :items
   resources :rifts
 
+  post '/item_premium', to: 'items#create_premium', as: 'items_create_premium'
+  get '/item_premium', to: 'items#new_premium', as: 'items_new_premium'
+
   post '/item_variant', to: 'items#create_variant', as: 'items_create_variant'
   get '/item_variant', to: 'items#new_variant', as: 'items_new_variant'
 

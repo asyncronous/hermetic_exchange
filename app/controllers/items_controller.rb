@@ -1,4 +1,15 @@
 class ItemsController < ApplicationController
+    before_action :authenticate_trader!
+    before_action :check_roles, only: [:new_premium, :create_premium, :new_variant, :create_variant]
+
+    def create_premium
+        current_trader.items.create(premium_params)
+    end
+
+    def new_premium
+        @item = Item.new
+    end
+
     def create_variant
         # item = Item.create(menu_item_params)
         # redirect_to menu_item_path(item)
@@ -11,6 +22,7 @@ class ItemsController < ApplicationController
             item_variant.effects << item_var_params[:effect]
             item_variant.rarities << item_var_params[:rarity]
             item_variant.power << item_var_params[:power]
+            item_variant.save
         end
         redirect_to root_path
       end
@@ -71,6 +83,17 @@ class ItemsController < ApplicationController
     end
 
     private
+    def check_roles
+        if !(trader_signed_in? && current_trader.has_role?(:admin))
+            flash[:alert] = "You are not authorized to access that page, trader"
+            redirect_to root_path
+        end
+    end
+
+    def premium_params
+        params.require(:item).permit(:icon, :name,:item_type,:rarity,:description,:power,:worth,:listed_price)
+    end
+    
     def item_params
         params.require(:item).permit(:listed_price, :equipped_listed, :trader_id, :input, :icon)
     end
