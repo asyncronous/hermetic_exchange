@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :items
   resources :rifts
 
+  post '/item_variant', to: 'items#create_variant', as: 'items_create_variant'
+  get '/item_variant', to: 'items#new_variant', as: 'items_new_variant'
+
   #buy item
   put '/item/:id/buy', to: 'items#buy', as: 'items_buy'
 

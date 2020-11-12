@@ -29,6 +29,10 @@
             <h4>No. of Rifts Closed: <%= current_trader.rifts_closed %></h4>
             <h4>No. of Items Traded: <%= current_trader.items_traded %></h4>
             <%= link_to 'Edit Profile', edit_trader_registration_path, method: :get %>
+            <% if current_trader.has_role?(:admin) %>
+            <%= link_to 'Create Item Variants', items_new_variant_path, method: :get %>
+            <%= link_to 'Create Premium Items', edit_trader_registration_path, method: :get %>
+            <% end %>
         </div>
     </div>
     <div class="dash-cont">
@@ -64,4 +68,25 @@
         </div>
     </div>
   </div>
+<% end %>
+
+<% ItemTypeConstructor.all.each do |item| %>
+
+<% if item.icon.attached? %>
+<%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+<% end %>
+
+<% end %>
+
+<p>Effects:</p>
+<% ItemVariantConstructor.first.effects.each do |effect| %>
+ <%= effect %>
+<% end %>
+<p>Rarities:</p>
+<% ItemVariantConstructor.first.rarities.each do |rare| %>
+ <%= rare %>
+<% end %>
+<p>Powers:</p>
+<% ItemVariantConstructor.first.power.each do |power| %>
+ <%= power %>
 <% end %>

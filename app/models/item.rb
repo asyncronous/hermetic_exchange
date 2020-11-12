@@ -14,6 +14,7 @@ class Item < ApplicationRecord
     belongs_to :rift, optional: true
     belongs_to :exchange, optional: true
     belongs_to :trader, optional: true
+
     has_one_attached :icon
 
     def set_random_attributes
@@ -32,9 +33,8 @@ class Item < ApplicationRecord
           filename: ts + '_' + fn,
           content_type: ct,
         )
+
         self.icon.attach(new_blob)
-        
-        # self.icon.attach(rand_type.icon)
         self.item_type = rand_type.item_type
         self.rarity = var_constructor.rarities.sample
         self.power = var_constructor.power.sample

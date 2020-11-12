@@ -1,4 +1,25 @@
 class ItemsController < ApplicationController
+    def create_variant
+        # item = Item.create(menu_item_params)
+        # redirect_to menu_item_path(item)
+        if item_type_params != nil
+            item_type = ItemTypeConstructor.create(item_type_params) 
+        end
+
+        if item_var_params != nil
+            item_variant = ItemVariantConstructor.first
+            item_variant.effects << item_var_params[:effect]
+            item_variant.rarities << item_var_params[:rarity]
+            item_variant.power << item_var_params[:power]
+        end
+        redirect_to root_path
+      end
+    
+    def new_variant
+        @item_type = ItemTypeConstructor.new
+        @item_variant = ItemVariantConstructor.new
+    end
+    
     def update
         @item = Item.find(params[:id])
         par = item_params
@@ -52,5 +73,22 @@ class ItemsController < ApplicationController
     private
     def item_params
         params.require(:item).permit(:listed_price, :equipped_listed, :trader_id, :input, :icon)
+    end
+
+    def item_type_params
+        if params[:item_type_constructor]
+            params.require(:item_type_constructor).permit(:item_type, :icon)
+        else
+            return nil
+        end
+
+    end
+
+    def item_var_params
+        if params[:item_variant_constructor]
+        params.require(:item_variant_constructor).permit(:effect, :rarity, :power)
+        else
+            return nil
+        end
     end
 end

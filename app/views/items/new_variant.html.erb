@@ -1,0 +1,31 @@
+<h2> Creat new item Variants or Types</h2>
+
+<%= form_with model: @item_type, url: { controller: "items", action: "create_variant" }, local: true do |f| %>
+<div>
+    <%= f.label :item_type %>
+    <%= f.text_field :item_type, placeholder: "dagger" %>
+
+    <%= f.label :icon %>
+    <%= f.file_field :icon %>
+</div>
+<br>
+<div>
+    <%= f.submit %>
+</div>
+<% end %>
+
+<%= form_with model: @item_variant, url: { controller: "items", action: "create_variant" }, local: true do |f| %>
+<div>
+    <%= f.label :effect %>
+    <%= f.text_field :effect, placeholder: "frost" %>
+    <%= f.label :rarity %>
+    <%= f.text_field :rarity, placeholder: "unique" %>
+    <%= f.label :effect %>
+    <%= f.number_field :power, placeholder: 1 %>
+
+</div>
+<br>
+<div>
+    <%= f.submit %>
+</div>
+<% end %>
