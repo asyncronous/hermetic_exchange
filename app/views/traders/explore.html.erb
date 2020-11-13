@@ -5,13 +5,21 @@
      </div>
      <div>
          <h3>Claim Daily Reward</h3>
-         <p>Item</p>
-         <p>Credits</p>
+        <% if @claim %>
+            <button><%= link_to "Claim!", claim_path, method: "GET" %></button>
+        <% else %>
+            <p>You already claimed todays reward! Come back tomorrow!</p>
+        <% end %>
      </div>
      <div>
+         <%= @REFRESH %>
+         <%= @curr_time_conv %>
+         <%= @refresh_time_conv %>
          <h3>Select Rift</h3>
          <% int = 1 %>
-         <% @rifts.each do |rift| %>
+
+         <% if @rifts %>
+            <% @rifts.each do |rift| %>
             <div>
                 <h4><%= "Rift " + int.to_s  %></h4>
                 <% int += 1 %>
@@ -26,8 +34,11 @@
                 <% end %>
                 Credits: <%= rift.credits %>
             </div>
-
+            <% end %>
+         <% else %>
+            <p>You've closed all of todays rifts!</p>
          <% end %>
+         
      </div>
 
  </section>

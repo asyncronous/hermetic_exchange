@@ -11,13 +11,51 @@ class TradersController < ApplicationController
     end
   end
 
+  def claim
+    if trader_signed_in?
+      if current_trader.claimed_daily == false
+        item = current_trader.items.create
+        credits = rand(100..200)
+        current_trader.update(claimed_daily: true, credits: (current_trader.credits += credits))
+        flash[:notice] = "#{item.name.capitalize} and #{credits} Credits claimed!"
+      end
+      redirect_to explore_path
+    end
+  end
+
+  def close_rift
+
+  end
+
   #rifts
   def explore
     if trader_signed_in?
-      if current_trader.closed_a_rift
+      if current_trader.claimed_daily == false
+        @claim = true
+      end
 
+      #update time
+      current_trader.update(current_time: Time.now)
 
-      @rifts = current_trader.rifts
+      #convert to comparison I can understand
+      curr_time = current_trader.current_time
+      @curr_time_conv = "#{curr_time.year}#{curr_time.month}#{curr_time.day}".to_i
+      refresh_time = current_trader.refresh_time
+      @refresh_time_conv = "#{refresh_time.year}#{refresh_time.month}#{refresh_time.day}".to_i
+      
+      #compare days
+      if @curr_time_conv > @refresh_time_conv
+        current_trader.update(claimed_daily: false, refresh_time: Time.new(curr_time.year, curr_time.month, curr_time.day + 1))
+        # current_trader.rifts.destroy_all
+        # current_trader.rifts.create
+        # current_trader.rifts.create
+        # current_trader.rifts.create
+        @REFRESH = "YES"
+        @rifts = current_trader.rifts
+      else
+        @REFRESH = "NO"
+        @rifts = current_trader.rifts
+      end
     end
   end
 

@@ -11,7 +11,11 @@ class DeviseCreateTraders < ActiveRecord::Migration[6.0]
       t.integer :highest_rift_level
       t.integer :rifts_closed
       t.integer :items_traded
-      t.boolean :closed_a_rift
+      
+      t.boolean :claimed_daily
+      t.datetime :refresh_time
+      t.datetime :current_time
+
 
       ## Recoverable
       t.string   :reset_password_token

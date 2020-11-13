@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   #marketplace
   get '/exchange', to: 'traders#exchange', as: 'exchange'
   #exploretherift
+  get '/explore/claim', to: 'traders#claim', as: 'claim'
   get '/explore', to: 'traders#explore', as: 'explore'
   #inventory
   get '/inventory', to: 'traders#inventory', as: 'inventory'

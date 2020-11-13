@@ -10,6 +10,9 @@ class Trader < ApplicationRecord
   attribute :highest_rift_level, default: 0
   attribute :rifts_closed, default: 0
   attribute :items_traded, default: 0
+  attribute :claimed_daily, default: false
+  attribute :refresh_time, default: Time.new(2020,1,1)
+  attribute :current_time, default: Time.now
 
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
