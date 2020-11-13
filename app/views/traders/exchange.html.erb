@@ -15,8 +15,8 @@
 <% if @searched_items %>
 <h2>Search Results:</h2>
     <% @searched_items.each do |item| %>
-        <div class="item-container">
-            <p>Owner: <%= link_to item.trader.username, trader_path(item.trader), method: :get %></p>
+        <div class="item-container"><%= link_to item.trader.username, trader_path(item.trader), method: :get %>
+            <p>Owner: </p>
             <br>
             <% if item.icon.attached? %>
             <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>

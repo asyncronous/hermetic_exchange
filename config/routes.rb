@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   devise_for :traders
-  # get 'home/index'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :traders
   resources :items
   # resources :rifts
 
+  #
+
+  #admin create item and variant routes
   post '/item_premium', to: 'items#create_premium', as: 'items_create_premium'
   get '/item_premium', to: 'items#new_premium', as: 'items_new_premium'
 
@@ -15,6 +18,16 @@ Rails.application.routes.draw do
   #buy item
   put '/item/:id/buy', to: 'items#buy', as: 'items_buy'
 
+  #buy credits
+  post '/buy_credits/:id', to: 'traders#purchase', as: 'purchase'
+  get '/buy_credits/:id', to: 'traders#show_credits', as: 'show_credits'
+  get '/buy_credits/get', to: 'traders#get_credits', as: 'get_credits'
+  get '/buy_credits', to: 'traders#buy_credits', as: 'buy_credits'
+
+  get '/success', to: 'traders#success', as: 'success'
+  get '/cancel', to: 'traders#cancel', as: 'cancel'
+
+  #search and sort
   get '/sort_inventory', to:'items#sort', as: 'sort_inventory'
   get '/find_item', to: 'items#find', as: 'find_item'
   get '/find', to: 'traders#find', as: 'find'
@@ -33,9 +46,9 @@ Rails.application.routes.draw do
   #messenger
   get '/messenger', to: 'traders#messenger', as: 'messenger'
 
-  #search
+  #search traders
   get '/search', to: 'traders#search', as: 'search'
-  
+
   #dashboard/splash
   root to: 'home#index'
 end

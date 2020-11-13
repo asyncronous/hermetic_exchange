@@ -1,0 +1,22 @@
+<% if params[:id] != nil %>
+<button id="buynow-button">BUY</button>
+<% end %>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLEKEY'] %>')
+    const buyButton = document.getElementById('buynow-button')
+
+    buyButton.addEventListener('click', function(){
+        fetch('<%= purchase_path(params[:id]) %>', {
+            method: 'POST'
+        })
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(session) {
+            return stripe.redirectToCheckout({ sessionId: session.id})
+        })
+    })
+</script>

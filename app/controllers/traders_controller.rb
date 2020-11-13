@@ -1,5 +1,7 @@
 class TradersController < ApplicationController
   before_action :authenticate_trader!
+  # skip_before_action :verify_authenticity_token, only: [:purchase]
+  protect_from_forgery except: :purchase
 
   #marketplace
   def exchange
@@ -118,6 +120,52 @@ class TradersController < ApplicationController
 
   def show
     @this_trader = Trader.find(params[:id])
+  end
+
+  def buy_credits
+  end
+
+  def show_credits
+  end
+
+  def get_credits
+    redirect_to show_credits(params[:id])
+  end
+
+  def purchase
+    Stripe.api_key = ENV['STRIPE_APIKEY']
+    session = Stripe::Checkout::Session.create({
+      payment_method_types: ['card'],
+      mode: 'payment',
+      success_url: success_url(params[:id]),
+      cancel_url: cancel_url(params[:id]),
+      line_items: [
+        {
+          price_data: {
+            currency: 'aud',
+            product_data: {
+              name: "Hermetic-Exchange Credits"
+            },
+            unit_amount: (params[:id].to_i * 0.1).to_i
+            # unit_amount: 500
+          },
+          quantity: 1
+        }
+      ]
+    })
+
+    render json: session
+  end
+
+  def success
+    current_trader.credits += params[:format].to_i
+    current_trader.save!
+    flash[:notice] = "SUCCESS! BOUGHT #{params[:format]} CREDITS!"
+    redirect_to root_path
+  end
+  
+  def cancel
+    render plain: "CANCELLED!"
   end
 
   private
