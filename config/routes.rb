@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :traders
   resources :items
-  resources :rifts
+  # resources :rifts
 
   post '/item_premium', to: 'items#create_premium', as: 'items_create_premium'
   get '/item_premium', to: 'items#new_premium', as: 'items_new_premium'
@@ -21,15 +21,21 @@ Rails.application.routes.draw do
 
   #marketplace
   get '/exchange', to: 'traders#exchange', as: 'exchange'
+  
   #exploretherift
+  delete '/rifts/:id', to: 'traders#close', as: 'close'
   get '/explore/claim', to: 'traders#claim', as: 'claim'
   get '/explore', to: 'traders#explore', as: 'explore'
+
   #inventory
   get '/inventory', to: 'traders#inventory', as: 'inventory'
+
   #messenger
   get '/messenger', to: 'traders#messenger', as: 'messenger'
+
   #search
   get '/search', to: 'traders#search', as: 'search'
+  
   #dashboard/splash
   root to: 'home#index'
 end

@@ -23,8 +23,22 @@ class TradersController < ApplicationController
     end
   end
 
-  def close_rift
+  def close
+    rift = Rift.find(params[:id])
+    # assign items to trader, remove reference to rift
+    string_array = []
+    rift.items.each do |item|
+      item.update(rift_id: nil, trader: rift.trader)
+      string_array << " | #{item.name.capitalize}"
+    end
+    # add credits to trader
+    rift.trader.update(credits: rift.trader.credits += rift.credits)
+    
+    flash[:notice] = "Gained #{string_array.join} and #{rift.credits} Credits!"
+    # destroy rift
+    rift.destroy 
 
+    redirect_to explore_path
   end
 
   #rifts
@@ -46,10 +60,10 @@ class TradersController < ApplicationController
       #compare days
       if @curr_time_conv > @refresh_time_conv
         current_trader.update(claimed_daily: false, refresh_time: Time.new(curr_time.year, curr_time.month, curr_time.day + 1))
-        # current_trader.rifts.destroy_all
-        # current_trader.rifts.create
-        # current_trader.rifts.create
-        # current_trader.rifts.create
+        current_trader.rifts.destroy_all
+        current_trader.rifts.create
+        current_trader.rifts.create
+        current_trader.rifts.create
         @REFRESH = "YES"
         @rifts = current_trader.rifts
       else

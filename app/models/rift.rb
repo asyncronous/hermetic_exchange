@@ -9,13 +9,13 @@ class Rift < ApplicationRecord
 
   attribute :credits, default: 100
   
-  has_many :items, dependent: :destroy
+  has_many :items
   belongs_to :trader
 
   def set_items
     self.items.create
     self.items.create
     self.items.create
-    self.credits = rand()
+    self.credits = rand(100..200)
   end
 end

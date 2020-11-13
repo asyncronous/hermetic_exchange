@@ -15,6 +15,8 @@ class Item < ApplicationRecord
     belongs_to :exchange, optional: true
     belongs_to :trader, optional: true
 
+    scope :equipped, -> {where(equipped: true)}
+
     has_one_attached :icon, dependent: :purge
 
     def set_random_attributes

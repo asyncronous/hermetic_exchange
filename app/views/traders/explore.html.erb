@@ -12,13 +12,14 @@
         <% end %>
      </div>
      <div>
+         DEBUG:
          <%= @REFRESH %>
          <%= @curr_time_conv %>
          <%= @refresh_time_conv %>
-         <h3>Select Rift</h3>
+         <h3>Today's Rifts</h3>
          <% int = 1 %>
 
-         <% if @rifts %>
+         <% if @rifts.length > 0 %>
             <% @rifts.each do |rift| %>
             <div>
                 <h4><%= "Rift " + int.to_s  %></h4>
@@ -39,6 +40,30 @@
             <p>You've closed all of todays rifts!</p>
          <% end %>
          
+     </div>
+     <div>
+         <% if @rifts.length > 0%>
+         <h3>Choose a Rift</h3>
+         <% int = 1 %>
+            <% @rifts.each do |rift| %>
+                <h4><%= "Rift " + int.to_s  %></h4>
+                <% rift_power = 0 %>
+                <% trader_power = 0 %>
+
+                <% rift.items.each do |item| %>
+                    <% rift_power += item.power %>
+                <% end %>
+
+                <h4>Power: <%= rift_power %></h4>
+                <% current_trader.items.equipped.each do |item| %>
+                    <% trader_power += item.power %>
+                <% end %>
+
+                <h4>Chance of Success: <%=  %></h4>
+                <button><%= link_to "Close This Rift!", close_path(rift), method: "DELETE" %></button>
+
+            <% end %>
+        <% end %>
      </div>
 
  </section>
