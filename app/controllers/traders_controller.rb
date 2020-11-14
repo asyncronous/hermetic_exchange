@@ -1,6 +1,6 @@
 class TradersController < ApplicationController
   before_action :authenticate_trader!
-  # skip_before_action :verify_authenticity_token, only: [:purchase]
+  before_action :check_roles, only: :explore
   protect_from_forgery except: :purchase
 
   #marketplace
@@ -93,14 +93,15 @@ class TradersController < ApplicationController
       #compare days
       if @curr_time_conv > @refresh_time_conv
         current_trader.update(claimed_daily: false, refresh_time: Time.new(curr_time.year, curr_time.month, curr_time.day + 1))
+        current_trader.rifts.each do |rift|
+          rift.items.destroy_all
+        end
         current_trader.rifts.destroy_all
         current_trader.rifts.create
         current_trader.rifts.create
-        current_trader.rifts.create
-        @REFRESH = "YES"
+
         @rifts = current_trader.rifts
       else
-        @REFRESH = "NO"
         @rifts = current_trader.rifts
       end
 
@@ -209,6 +210,13 @@ class TradersController < ApplicationController
   end
 
   private
+  def check_roles
+    if (trader_signed_in? && current_trader.has_role?(:admin))
+        flash[:alert] = "You're the Admin you don't explore rifts!"
+        redirect_to root_path
+    end
+  end
+
   def trader_params
     params.require(:trader).permit(:login)
   end

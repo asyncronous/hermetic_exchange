@@ -47,6 +47,8 @@ class Trader < ApplicationRecord
   end
 
   def generate_starter_inv
-    self.items.create(equipped: true)
+    if !self.has_role?(:admin)
+      self.items.create(equipped: true)
+    end
   end
 end
