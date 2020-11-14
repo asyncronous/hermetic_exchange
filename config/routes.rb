@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   #search traders
   get '/search', to: 'traders#search', as: 'search'
 
+  get '/about', to: 'home#about', as: 'about'
+
   #dashboard/splash
   root to: 'home#index'
 end
