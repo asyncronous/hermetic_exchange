@@ -1,6 +1,7 @@
 class Trader < ApplicationRecord
   rolify
   before_create :set_default_avatar
+  after_create :generate_starter_inv
 
   attr_writer :login
 
@@ -24,7 +25,7 @@ class Trader < ApplicationRecord
 
   has_many :items, dependent: :destroy
   has_many :rifts, dependent: :destroy
-  has_one_attached :avatar
+  has_one_attached :avatar, dependent: :purge
 
   def login
     @login || self.username || self.email
@@ -43,5 +44,9 @@ class Trader < ApplicationRecord
     if !self.avatar.attached?
       self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'skull_avatar.png')), filename: 'skull_avatar.png', content_type: 'image/png')
     end
+  end
+
+  def generate_starter_inv
+    self.items.create(equipped: true)
   end
 end

@@ -16,6 +16,7 @@ class Item < ApplicationRecord
     belongs_to :trader, optional: true
 
     scope :equipped, -> {where(equipped: true)}
+    scope :orphan, -> {where(trader: nil)}
 
     has_one_attached :icon, dependent: :purge
 
@@ -71,7 +72,7 @@ class Item < ApplicationRecord
 
                 self.icon.attach(new_blob)
             end
-            
+
             self.exchange = Exchange.first
             self.listed = true
         end

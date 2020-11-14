@@ -79,10 +79,6 @@ class TradersController < ApplicationController
   #rifts
   def explore
     if trader_signed_in?
-      if current_trader.claimed_daily == false
-        @claim = true
-      end
-
       #update time
       current_trader.update(current_time: Time.now)
 
@@ -105,9 +101,13 @@ class TradersController < ApplicationController
         @REFRESH = "NO"
         @rifts = current_trader.rifts
       end
+
+      if current_trader.claimed_daily == false
+        @claim = true
+      end
     end
   end
-
+  
   #inventory
   def inventory
     if trader_signed_in?
