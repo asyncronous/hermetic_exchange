@@ -1,6 +1,11 @@
 class Trader < ApplicationRecord
   rolify
+  before_create :set_default_avatar
+
   attr_writer :login
+
+
+
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -31,6 +36,12 @@ class Trader < ApplicationRecord
       where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
+    end
+  end
+
+  def set_default_avatar
+    if !self.avatar.attached?
+      self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'skull_avatar.png')), filename: 'skull_avatar.png', content_type: 'image/png')
     end
   end
 end
