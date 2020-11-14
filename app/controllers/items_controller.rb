@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
     def create_premium
         current_trader.items.create(premium_params)
+        redirect_to root_path
     end
 
     def new_premium
@@ -56,13 +57,19 @@ class ItemsController < ApplicationController
     def buy
         @item = Item.find(params[:id])
         curr_owner = @item.trader
-        if curr_owner != current_trader
-            curr_owner.update(credits: curr_owner.credits + @item.listed_price)
-            current_trader.update(credits: current_trader.credits - @item.listed_price)
-            @item.update(trader: current_trader, listed: false, exchange: nil)
+        if current_trader.credits < @item.listed_price
+            flash[:alert] = "You don't have enough credits for that!"
         else
-            flash[:alert] = "Why are you trying to buy your own item lol"
+            if curr_owner != current_trader
+                curr_owner.update(credits: curr_owner.credits + @item.listed_price, items_traded: curr_owner.items_traded += 1)
+                current_trader.update(credits: current_trader.credits - @item.listed_price)
+                @item.update(trader: current_trader, listed: false, exchange: nil)
+            else
+                flash[:alert] = "Thats your own item!"
+            end
         end
+
+
         redirect_to exchange_path
     end
 

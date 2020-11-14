@@ -16,6 +16,7 @@
          <%= @REFRESH %>
          <%= @curr_time_conv %>
          <%= @refresh_time_conv %>
+
          <h3>Today's Rifts</h3>
          <% int = 1 %>
 
@@ -59,7 +60,9 @@
                     <% trader_power += item.power %>
                 <% end %>
 
-                <h4>Chance of Success: <%=  %></h4>
+                <% rift_success_like = ((trader_power - rift_power) ** 3) * 0.05 + 50 %>
+
+                <h4>Chance of Success: <%= "%0.2f" % [rift_success_like] %>%</h4>
                 <button><%= link_to "Close This Rift!", close_path(rift), method: "DELETE" %></button>
 
             <% end %>

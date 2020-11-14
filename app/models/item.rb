@@ -72,6 +72,7 @@ class Item < ApplicationRecord
                 self.icon.attach(new_blob)
             end
             
+            self.exchange = Exchange.first
             self.listed = true
         end
     end

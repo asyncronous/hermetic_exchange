@@ -27,16 +27,49 @@ class TradersController < ApplicationController
 
   def close
     rift = Rift.find(params[:id])
-    # assign items to trader, remove reference to rift
-    string_array = []
+    rift_power = 0
+    trader_power = 0
+
     rift.items.each do |item|
-      item.update(rift_id: nil, trader: rift.trader)
-      string_array << " | #{item.name.capitalize}"
+      rift_power += item.power
     end
+
+    current_trader.items.equipped.each do |item| 
+      trader_power += item.power 
+    end
+
+    rift_success_like = ((trader_power - rift_power) ** 3) * 0.05 + 50
+
+    roll = rand(0..100)
+
+    if rift_success_like > roll
+      # assign items to trader, remove reference to rift
+      string_array = []
+      rift.items.each do |item|
+        item.update(rift_id: nil, trader: rift.trader)
+        string_array << " | #{item.name.capitalize}"
+      end
+      
+      flash[:notice] = "Success! Gained #{string_array.join} and #{rift.credits} Credits!"
+
+      current_trader.rifts_closed += 1
+
+      if current_trader.highest_rift_level < rift_power
+        current_trader.highest_rift_level = rift_power
+      end
+
+      current_trader.save!
+
+    else
+      # destroy items
+      rift.items.destroy_all
+
+      flash[:notice] = "Failure! Only gained #{rift.credits} Credits!"
+    end
+
     # add credits to trader
     rift.trader.update(credits: rift.trader.credits += rift.credits)
-    
-    flash[:notice] = "Gained #{string_array.join} and #{rift.credits} Credits!"
+
     # destroy rift
     rift.destroy 
 
@@ -139,6 +172,7 @@ class TradersController < ApplicationController
       mode: 'payment',
       success_url: success_url(params[:id]),
       cancel_url: cancel_url(params[:id]),
+      customer_email: current_trader.email,
       line_items: [
         {
           price_data: {
