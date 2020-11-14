@@ -9,7 +9,9 @@ class TradersController < ApplicationController
     @exchange_listed = Exchange.first.items.where(rarity: "premium")
 
     if params[:passed_param] != nil
-        @searched_items = Item.find(params[:passed_param])
+      @searched_items = Item.find(params[:passed_param])
+    else
+      @searched_items = Item.where(listed: true).order(:listed_price).reverse_order.first(5)
     end
   end
 
@@ -135,10 +137,14 @@ class TradersController < ApplicationController
 
   #search
   def search
-    @trader = Trader.new
     if params[:passed_param] != nil
-        @searched_trader = Trader.find(params[:passed_param])
+      @searched_traders = []
+      @searched_traders << Trader.find(params[:passed_param])
+    else
+      @searched_traders = Trader.all.order(:username).first(5)
     end
+
+    @trader = Trader.new
   end
 
   def find

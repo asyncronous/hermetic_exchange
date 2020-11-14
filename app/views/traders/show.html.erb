@@ -4,7 +4,9 @@
             <h2>User Profile</h2>
         </div>
         <div>
-            <i>Image</i>
+          <% if @this_trader.avatar.attached? %>
+          <%= cl_image_tag(@this_trader.avatar.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+          <% end %>
         </div>
         <div>
             <h3><%= @this_trader.username %></h3>

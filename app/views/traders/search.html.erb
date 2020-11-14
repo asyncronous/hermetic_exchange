@@ -10,13 +10,18 @@
 </div>
 <% end %>
 
-<% if @searched_trader != nil %>
-    <h3><%= @searched_trader.username %></h3>
-    <p>Lorem Ipsum Description</p>
-    <h4>Credits: <%= @searched_trader.credits %></h4>
+<% if @searched_traders %>
+    <% @searched_traders.each do |trader| %>
+        <% if trader.avatar.attached? %>
+        <%= cl_image_tag(trader.avatar.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+        <% end %>
+        <h3><%= trader.username %></h3>
+        <p>Lorem Ipsum Description</p>
+        <h4>Credits: <%= trader.credits %></h4>
 
-    <h4>Strongest Rift Closed: <%= @searched_trader.highest_rift_level %></h4>
-    <h4>No. of Rifts Closed: <%= @searched_trader.rifts_closed %></h4>
-    <h4>No. of Items Traded: <%= @searched_trader.items_traded %></h4>
-    <%= link_to "Show Profile", trader_path(@searched_trader), method: :get %> </p>
+        <h4>Strongest Rift Closed: <%= trader.highest_rift_level %></h4>
+        <h4>No. of Rifts Closed: <%= trader.rifts_closed %></h4>
+        <h4>No. of Items Traded: <%= trader.items_traded %></h4>
+        <%= link_to "Show Profile", trader_path(trader), method: :get %> </p>
+    <% end %> 
 <% end %>
