@@ -9,7 +9,7 @@
     <%= f.submit "Search" %>
 </div>
 <% end %>
-
+<br>
 <% if @searched_traders %>
     <% @searched_traders.each do |trader| %>
         <% if trader.avatar.attached? %>

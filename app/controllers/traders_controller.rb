@@ -99,6 +99,7 @@ class TradersController < ApplicationController
         current_trader.rifts.destroy_all
         current_trader.rifts.create
         current_trader.rifts.create
+        current_trader.rifts.create
 
         @rifts = current_trader.rifts
       else
