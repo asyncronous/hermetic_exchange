@@ -1,6 +1,7 @@
 <div class="dash-body">
     <div class="dash-cont">
         <h1>Inventory</h1>
+        <div class="parent-cont">
         <% @items.each do |item| %>
             <div class="item-container">
                 <% if item.icon.attached? %>
@@ -37,6 +38,7 @@
                 </div>
             </div>
         <% end %>
+        </div>
     </div>
     <div>
         <%= form_with model: @items.first, url: { controller: "items", action: "sort" }, method: 'get', local: true do |f| %>

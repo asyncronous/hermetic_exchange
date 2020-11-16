@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+$grey-trans: #3333337a;
+
 @font-face {
     font-family: 'depixelklein';
     src: url(asset-path('depixelklein-webfont.ttf'));
@@ -15,24 +17,16 @@
     color: white;
     margin: 0;
     padding: 0;
+    // font-size: 
     // background-color: transparent ;
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    * {
-        // font-size: 1.1em;
+    h1, h2 {
+        font-size: 1.3em;
     }
 
-    // .dash-body{
-    //     // border: 1px solid ;
-    //     display: flex;
-    //     flex-direction: column;
-    // }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (max-width: 800px) {
     .dash-body{
 
         flex-direction: column;
@@ -41,14 +35,41 @@
     .dash-cont{
         flex-basis:100%; 
     }
+
+    .nav-link, .nav-signed{
+        font-size: 0.7em;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 601px) and (max-width: 750px) {
+    .dash-body{
+
+        flex-direction: column;
+    }
+
+    .dash-cont{
+        flex-basis:100%; 
+    }
+
+    h1, h2 {
+        font-size: 1.6em;
+    }
+
+    // .nav{
+    //     font-size: 0.7em;
+    // }
+    .nav-link, .nav-signed{
+        font-size: 0.8em;
+    }
 }
 
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 801px) {
+@media only screen and (min-width: 751px) {
     .dash-body{
         // border: 1px solid ;
-        flex-direction: row;
+        // flex-direction: row;
     }
 
     .dash-cont{
@@ -96,17 +117,74 @@ button{
     // border: 1px solid ;
     display: flex;
     justify-content: space-between;
+    margin: 2px;
+}
+
+.parent-cont{
+    // border: 1px solid ;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    // grid-template-rows: repeat(auto-fill, 100px);
+    grid-auto-flow: row;
+    width:100%;
+    // flex-wrap: wrap;
+    // justify-content: space-between;
+
+    
 }
 
 .dash-cont{
     // border: 1px solid ;
-    // align-items: center;
-    padding: 5px;
-    margin: 5px;
-    flex-basis:33.33%; 
     display: flex;
     flex-direction: column;
     align-items: center;
+    // border: 1px solid white ;
+    flex-basis:37.5%; 
+
+
+
+    padding: 5px;
+    // margin: 5px;
+
+    // div{
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    // }
+
+    .item-container{
+        border: 1px solid white ;
+        background-color: $grey-trans;
+        // align-items: center;
+        padding: 10px;
+        margin: 5px;
+        flex-basis:25%; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // height: 100px;
+    
+        div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+        }
+    }
+}
+
+.main-dash-cont{
+    border: 1px solid white ;
+    background-color: $grey-trans;
+    // align-items: center;
+    padding: 10px;
+    margin: 5px;
+    // padding: 5px;
+    flex-basis:25%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: space-between;
 
     div{
         display: flex;
@@ -115,18 +193,16 @@ button{
     }
 }
 
-.type-one-parent-cont{
+.grand-cont{
     display: flex;
     justify-content: space-between;
 }
 
-.type-two-parent-cont{
+// .parent-cont{
+//     display: flex;
+//     justify-content: space-between;
+// }
 
-}
-
-.child-cont{
-    
-}
 
 
 .item-container{
@@ -138,14 +214,44 @@ button{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center; 
-    opacity: 95%;
+    opacity: 100%;
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 120vh;
+    margin: 0;
+    z-index: -2;
+    object-fit: fill;
+}
+
+#background-rot{ 
+    background-image: url(asset-path('noise.png'));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center; 
+    opacity: 100%;
+    // left: 100px;
+    top: -200px;
+    position: fixed;
+    width: 1500px;
+    height: 1500px;
     margin: 0;
     z-index: -1;
     object-fit: fill;
+
+    animation: shimmy 60s infinite linear;
 }
+
+@keyframes shimmy {
+    0% {
+      transform: translate(-100px, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(100px, 0) rotate(5deg);
+    }
+    100% {
+      transform: translate(-100px, 0) rotate(0deg);
+    }
+  }
 
 body{
     width: 100%;

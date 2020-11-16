@@ -4,13 +4,16 @@
     <title>HermeticExchange</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   
   <body>
     <div id="background"></div>
+    <div id="background-rot"></div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% if trader_signed_in? %>

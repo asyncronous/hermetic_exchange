@@ -13,7 +13,7 @@
 
 <% else %> 
   <div class="dash-body">
-    <div class="dash-cont">
+    <div class="main-dash-cont">
         <div>
             <h2>Dashboard</h2>
         </div>
@@ -42,24 +42,27 @@
     </div>
     <div class="dash-cont">
         <h3>Market Listed Items</h3>
-        <% current_trader.items.each do |item| %>
-          <% if item.listed == true %>
-            <div class="item-container">
-                <% if item.icon.attached? %>
-                <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
-                <% end %>
-                <p>Name: <%= item.name %></p>
-                <p>Type: <%= item.item_type %></p>
-                <p>Rarity: <%= item.rarity %></p>
-                <p>Description:<%= item.description %></p>
-                <p>Power: <%= item.power %></p>
-                <p>Price: <%= item.listed_price %></p>
-            </div>
+        <div class="parent-cont">
+          <% current_trader.items.each do |item| %>
+            <% if item.listed == true %>
+              <div class="item-container">
+                  <% if item.icon.attached? %>
+                  <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+                  <% end %>
+                  <p><%= item.name.capitalize %></p>
+                  <p>Type: <%= item.item_type %></p>
+                  <p>Rarity: <%= item.rarity %></p>
+                  <p>Description:<%= item.description %></p>
+                  <p>Power: <%= item.power %></p>
+                  <p>Price: <%= item.listed_price %></p>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
     </div>
     <div class="dash-cont">
         <h3>Equipped Items</h3>
+        <div class="parent-cont">
         <% current_trader.items.each do |item| %>
           <% if item.equipped == true %>
             <div class="item-container">
@@ -74,6 +77,7 @@
             </div>
           <% end %>
         <% end %>
+        </div>
         <div>
           <%= link_to 'Edit Inventory', inventory_path, method: :get %>
         </div>
