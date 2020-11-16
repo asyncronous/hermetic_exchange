@@ -93,7 +93,7 @@ class TradersController < ApplicationController
       @time_until_refresh = ((@refresh_time.to_time - @curr_time.to_time) / 1.hours).to_i
 
       #compare days
-      if @curr_time_conv > @refresh_time_conv
+      if @time_until_refresh < 0
         current_trader.update(claimed_daily: false, refresh_time: Time.new(@curr_time.year, @curr_time.month, @curr_time.day + 1))
         
         @rifts = current_trader.rifts
