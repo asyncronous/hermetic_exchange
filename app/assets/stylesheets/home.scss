@@ -2,6 +2,76 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+@font-face {
+    font-family: 'depixelklein';
+    src: url(asset-path('depixelklein-webfont.ttf'));
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+* {
+    font-family: 'depixelklein';
+    color: white;
+    margin: 0;
+    padding: 0;
+    // background-color: transparent ;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    * {
+        // font-size: 1.1em;
+    }
+
+    // .dash-body{
+    //     // border: 1px solid ;
+    //     display: flex;
+    //     flex-direction: column;
+    // }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 800px) {
+    .dash-body{
+
+        flex-direction: column;
+    }
+
+    .dash-cont{
+        flex-basis:100%; 
+    }
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 801px) {
+    .dash-body{
+        // border: 1px solid ;
+        flex-direction: row;
+    }
+
+    .dash-cont{
+        // flex-basis:33.333%; 
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    // ...
+}
+
+
+input{
+    color: black;
+}
+button{
+    color: black;
+    a{
+        color: black;
+    }
+}
+
 .nav{
     display: flex;
     justify-content: flex-start;
@@ -23,17 +93,61 @@
 }
 
 .dash-body{
-    border: 1px solid black;
+    // border: 1px solid ;
     display: flex;
     justify-content: space-between;
 }
 
 .dash-cont{
-    border: 1px solid black;
+    // border: 1px solid ;
+    // align-items: center;
+    padding: 5px;
+    margin: 5px;
+    flex-basis:33.33%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.type-one-parent-cont{
+    display: flex;
+    justify-content: space-between;
+}
+
+.type-two-parent-cont{
+
+}
+
+.child-cont{
+    
 }
 
 
 .item-container{
-    border: 1px solid black;
+    // border: 1px solid ;
+}
+
+#background{ 
+    background-image: url(asset-path('space_pixel.png'));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center; 
+    opacity: 95%;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    z-index: -1;
+    object-fit: fill;
+}
+
+body{
+    width: 100%;
+    height: auto;
 }

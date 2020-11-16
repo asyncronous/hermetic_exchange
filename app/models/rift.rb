@@ -7,7 +7,7 @@ class Rift < ApplicationRecord
     Item.new
   ]
 
-  attribute :credits, default: 100
+  attribute :credits, default: rand(100..200)
   
   has_many :items
   belongs_to :trader

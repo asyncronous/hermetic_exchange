@@ -3,10 +3,10 @@
 <%= form_with model: @item_type, url: { controller: "items", action: "create_variant" }, local: true do |f| %>
 <div>
     <%= f.label :item_type %>
-    <%= f.text_field :item_type, placeholder: "dagger" %>
+    <%= f.text_field :item_type, placeholder: "dagger", required: true %>
 
     <%= f.label :icon %>
-    <%= f.file_field :icon %>
+    <%= f.file_field :icon, required: true %>
 </div>
 <br>
 <div>
