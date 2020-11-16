@@ -102,10 +102,10 @@ class TradersController < ApplicationController
           @rifts.each do |rift|
             rift.items.destroy_all
           end
+
+          @rifts.destroy_all
         end 
         
-        @rifts.destroy_all
-
         current_trader.rifts.create
         current_trader.rifts.create
 
