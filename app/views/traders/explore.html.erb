@@ -13,8 +13,13 @@
      </div>
      <div>
          <h3>Today's Rifts</h3>
-         <%= @curr_time_conv %>
-         <%= @refresh_time_conv %>
+         <!-- Short Current: <%= @curr_time_conv %>
+         <br>
+         Short Refresh: <%= @refresh_time_conv %>
+         <br>
+         Long Current: <%= @curr_time %>
+         <br>
+         Long Refresh: <%= @refresh_time %> -->
          <% int = 1 %>
 
          <% if @rifts.length > 0 %>
@@ -36,6 +41,7 @@
             <% end %>
          <% else %>
             <p>You've closed all of todays rifts!</p>
+            <P>Hours Until Refresh: <%= @time_until_refresh %></P>
          <% end %>
          
      </div>

@@ -82,22 +82,30 @@ class TradersController < ApplicationController
   def explore
     if trader_signed_in?
       #update time
-      current_trader.update(current_time: Time.now)
+      current_trader.update(current_time: Time.now.utc)
 
       #convert to comparison I can understand
-      curr_time = current_trader.current_time
-      @curr_time_conv = "#{curr_time.year}#{curr_time.month}#{curr_time.day}".to_i
-      refresh_time = current_trader.refresh_time
-      @refresh_time_conv = "#{refresh_time.year}#{refresh_time.month}#{refresh_time.day}".to_i
-      
+      @curr_time = current_trader.current_time
+      @curr_time_conv = "#{@curr_time.year}#{@curr_time.month}#{@curr_time.day}".to_i
+      @refresh_time = current_trader.refresh_time
+      @refresh_time_conv = "#{@refresh_time.year}#{@refresh_time.month}#{@refresh_time.day}".to_i
+
+      @time_until_refresh = ((@refresh_time.to_time - @curr_time.to_time) / 1.hours).to_i
+
       #compare days
       if @curr_time_conv > @refresh_time_conv
-        current_trader.update(claimed_daily: false, refresh_time: Time.new(curr_time.year, curr_time.month, curr_time.day + 1))
-        current_trader.rifts.each do |rift|
-          rift.items.destroy_all
-        end
-        current_trader.rifts.destroy_all
-        current_trader.rifts.create
+        current_trader.update(claimed_daily: false, refresh_time: Time.new(@curr_time.year, @curr_time.month, @curr_time.day + 1))
+        
+        @rifts = current_trader.rifts
+
+        if @rifts.length > 0
+          @rifts.each do |rift|
+            rift.items.destroy_all
+          end
+        end 
+        
+        @rifts.destroy_all
+
         current_trader.rifts.create
         current_trader.rifts.create
 
