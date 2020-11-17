@@ -20,6 +20,7 @@
                     <% if item.icon.attached? %>
                     <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
                     <% end %>
+                    ITEM ID<%= item.id %>
                     <p>Name: <%= item.name.titleize %></p>
                     <p>Type: <%= item.item_type.titleize %></p>
                     <p>Rarity: <%= item.rarity.titleize %></p>
@@ -43,6 +44,7 @@
                 <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
                 <% end %>
                 <br>
+                ITEM ID<%= item.id %>
                 <p>Owner: <%= link_to item.trader.username, trader_path(item.trader), method: :get %></p>
                 <p>Name: <%= item.name.titleize %></p>
                 <p>Type: <%= item.item_type.titleize %></p>
