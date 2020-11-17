@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 $grey-trans: #3333337a;
+$dark-blue: #094695;
+$ruby-red: #bd3131;
+$light-blue: #93CEF1;
+$white: #FFFFFF;
 
 @font-face {
     font-family: 'depixelklein';
@@ -133,6 +137,10 @@ button{
     
 }
 
+img{
+    border-radius: 15px;
+}
+
 .dash-cont{
     // border: 1px solid ;
     display: flex;
@@ -153,7 +161,7 @@ button{
     // }
 
     .item-container{
-        border: 1px solid white ;
+        border: 2px solid $white;
         background-color: $grey-trans;
         // align-items: center;
         padding: 10px;
@@ -162,6 +170,7 @@ button{
         display: flex;
         flex-direction: column;
         align-items: center;
+        border-radius: 15px;
         // height: 100px;
     
         div{
@@ -174,7 +183,7 @@ button{
 }
 
 .main-dash-cont{
-    border: 1px solid white ;
+    border: 2px solid $white;
     background-color: $grey-trans;
     // align-items: center;
     padding: 10px;
@@ -185,6 +194,7 @@ button{
     flex-direction: column;
     align-items: center;
     // justify-content: space-between;
+    border-radius: 15px;
 
     div{
         display: flex;
@@ -228,7 +238,7 @@ button{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center; 
-    opacity: 100%;
+    opacity: 25%;
     // left: 100px;
     top: -200px;
     position: fixed;
@@ -238,22 +248,60 @@ button{
     z-index: -1;
     object-fit: fill;
 
-    animation: shimmy 60s infinite linear;
+    animation: shimmy 40s infinite linear;
+}
+#background-back{ 
+    background-image: url(asset-path('noise.png'));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center; 
+    opacity: 25%;
+    // left: 100px;
+    top: -200px;
+    position: fixed;
+    width: 1500px;
+    height: 1500px;
+    margin: 0;
+    z-index: -1;
+    object-fit: fill;
+
+    animation: shimmy_2 30s infinite linear;
 }
 
+@keyframes shimmy_2 {
+    0% {
+      transform: translate(100px, 0) rotate(0deg);
+      opacity: 25%;
+    }
+    50% {
+      transform: translate(-100px, 0) rotate(5deg);
+      opacity: 55%;
+    }
+    100% {
+      transform: translate(100px, 0) rotate(0deg);
+      opacity: 25%;
+    }
+}
 @keyframes shimmy {
     0% {
       transform: translate(-100px, 0) rotate(0deg);
+      opacity: 55%;
     }
     50% {
       transform: translate(100px, 0) rotate(5deg);
+      opacity: 25%;
     }
     100% {
       transform: translate(-100px, 0) rotate(0deg);
+      opacity: 55%;
     }
-  }
+}
 
 body{
     width: 100%;
     height: auto;
+}
+
+a:hover{
+    color: $ruby-red
 }

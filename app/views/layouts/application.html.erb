@@ -8,12 +8,15 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
 
+    <!-- <script src="https://js.stripe.com/v3/"></script> -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   
   <body>
     <div id="background"></div>
     <div id="background-rot"></div>
+    <div id="background-back"></div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% if trader_signed_in? %>

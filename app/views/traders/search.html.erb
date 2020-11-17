@@ -15,7 +15,8 @@
         <% if trader.avatar.attached? %>
         <%= cl_image_tag(trader.avatar.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
         <% end %>
-        <h3><%= trader.username %></h3>
+        <h3><%= trader.username.titleize %></h3>
+        <h3><%= trader.email.titleize %></h3>
         <p>Lorem Ipsum Description</p>
         <h4>Credits: <%= trader.credits %></h4>
 

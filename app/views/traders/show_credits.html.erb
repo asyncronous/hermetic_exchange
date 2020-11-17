@@ -10,6 +10,7 @@
 
     buyButton.addEventListener('click', function(){
         fetch('<%= purchase_path(params[:id]) %>', {
+            credentials: 'include',
             method: 'POST'
         })
         .then(function(response){

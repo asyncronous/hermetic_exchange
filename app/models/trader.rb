@@ -4,9 +4,6 @@ class Trader < ApplicationRecord
   after_create :generate_starter_inv
 
   attr_writer :login
-
-
-
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -23,9 +20,18 @@ class Trader < ApplicationRecord
   
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
+  validates :username, presence: true
+  validates :email, presence: true
+  before_save :downcase_fields
+
   has_many :items, dependent: :destroy
   has_many :rifts, dependent: :destroy
   has_one_attached :avatar, dependent: :purge
+
+  def downcase_fields
+    self.username.downcase!
+    self.email.downcase!
+  end
 
   def login
     @login || self.username || self.email

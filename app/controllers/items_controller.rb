@@ -20,8 +20,8 @@ class ItemsController < ApplicationController
 
         if item_var_params != nil
             item_variant = ItemVariantConstructor.first
-            item_variant.effects << item_var_params[:effect]
-            item_variant.rarities << item_var_params[:rarity]
+            item_variant.effects << item_var_params[:effect].downcase
+            item_variant.rarities << item_var_params[:rarity].downcase
             item_variant.power << item_var_params[:power]
             item_variant.save
         end
@@ -74,7 +74,11 @@ class ItemsController < ApplicationController
     end
 
     def find
-        @found_items = Item.where(listed: true, name: item_params[:input]).or(Item.where(listed: true, rarity: item_params[:input])).or(Item.where(listed: true, item_type: item_params[:input]))
+        search_string = item_params[:input].downcase
+
+        @found_items = Item.where(listed: true).where("name like ?", "%#{search_string}%").or(
+            Item.where(listed: true).where("rarity like ?", "%#{search_string}%")).or(
+            Item.where(listed: true).where("item_type like ?", "%#{search_string}%"))
 
         item_ids = @found_items.map(&:id)
         if item_ids.length > 0

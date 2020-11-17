@@ -4,7 +4,7 @@ class Item < ApplicationRecord
     # attribute :name, default: "Name"
     # attribute :item_type, default: "Type"
     # attribute :rarity, default: "Rarity"
-    # attribute :description, default: "Description"
+    attribute :description, default: "Description"
     # attribute :power, default: 1
     # attribute :worth, default: 100
     # attribute :listed_price, default: 100
@@ -75,6 +75,10 @@ class Item < ApplicationRecord
 
             self.exchange = Exchange.first
             self.listed = true
+
+            self.name.downcase!
+            self.rarity.downcase!
+            self.item_type.downcase!
         end
     end
 end

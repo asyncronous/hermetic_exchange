@@ -23,7 +23,7 @@
           <% end %>
         </div>
         <div>
-            <h3><%= current_trader.username %></h3>
+            <h3><%= current_trader.username.titleize %></h3>
             <p>Lorem Ipsum Description</p>
             <h4>Credits: <%= current_trader.credits %></h4>
             <h4>Power: <%= @power_level %></h4>
@@ -49,9 +49,9 @@
                   <% if item.icon.attached? %>
                   <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
                   <% end %>
-                  <p><%= item.name.capitalize %></p>
-                  <p>Type: <%= item.item_type %></p>
-                  <p>Rarity: <%= item.rarity %></p>
+                  <p><%= item.name.titleize %></p>
+                  <p>Type: <%= item.item_type.titleize %></p>
+                  <p>Rarity: <%= item.rarity.titleize %></p>
                   <p>Description:<%= item.description %></p>
                   <p>Power: <%= item.power %></p>
                   <p>Price: <%= item.listed_price %></p>
@@ -69,9 +69,9 @@
                 <% if item.icon.attached? %>
                 <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
                 <% end %>
-                <p>Name: <%= item.name %></p>
-                <p>Type: <%= item.item_type %></p>
-                <p>Rarity: <%= item.rarity %></p>
+                <p><%= item.name.titleize %></p>
+                <p>Type: <%= item.item_type.titleize %></p>
+                <p>Rarity: <%= item.rarity.titleize %></p>
                 <p>Description:<%= item.description %></p>
                 <p>Power: <%= item.power %></p>
             </div>

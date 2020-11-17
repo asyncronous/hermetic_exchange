@@ -149,7 +149,7 @@ class TradersController < ApplicationController
   def search
     if params[:passed_param] != nil
       @searched_traders = []
-      @searched_traders << Trader.find(params[:passed_param])
+      @searched_traders = Trader.find(params[:passed_param])
     else
       @searched_traders = Trader.all.order(:username).first(5)
     end
@@ -158,11 +158,14 @@ class TradersController < ApplicationController
   end
 
   def find
-    @found_trader = Trader.where(username: trader_params[:login].to_sym).or(Trader.where(email: trader_params[:login].to_sym)).first
-    if @found_trader != nil
-      redirect_to search_path(passed_param: @found_trader.id)
+    search_string = trader_params[:login].downcase
+
+    @found_traders = Trader.where("username like ?", "%#{search_string}%").or(Trader.where("email like ?", "%#{search_string}%"))
+    trader_ids = @found_traders.map(&:id)
+    if @found_traders != nil
+      redirect_to search_path(passed_param: trader_ids)
     else
-        flash[:notice] = "No trader by that name!"
+        flash[:notice] = "No traders by that name!"
       redirect_to search_path
     end
   end
@@ -189,15 +192,13 @@ class TradersController < ApplicationController
       success_url: success_url(params[:id]),
       cancel_url: cancel_url(params[:id]),
       customer_email: current_trader.email,
-      line_items: [
-        {
+      line_items: [{
           price_data: {
             currency: 'aud',
             product_data: {
               name: "Hermetic-Exchange Credits"
             },
             unit_amount: (params[:id].to_i * 0.1).to_i
-            # unit_amount: 500
           },
           quantity: 1
         }
