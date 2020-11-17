@@ -1,5 +1,5 @@
 <div class="dash-body">
-    <div class="dash-cont">
+    <div class="main-dash-cont">
         <div>
             <h2>User Profile</h2>
         </div>
@@ -10,7 +10,6 @@
         </div>
         <div>
             <h3><%= @this_trader.username.titleize %></h3>
-            <p>Lorem Ipsum Description</p>
             <h4>Credits: <%= @this_trader.credits %></h4>
             <h4>Strongest Rift Closed: <%= @this_trader.highest_rift_level %></h4>
             <h4>No. of Rifts Closed: <%= @this_trader.rifts_closed %></h4>
@@ -19,37 +18,41 @@
     </div>
     <div class="dash-cont">
         <h3>Market Listed Items</h3>
-        <% @this_trader.items.each do |item| %>
-          <% if item.listed == true %>
-            <div class="item-container">
-                <% if item.icon.attached? %>
-                <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
-                <% end %>
-                <p>Name: <%= item.name.titleize %></p>
-                <p>Type: <%= item.item_type.titleize %></p>
-                <p>Rarity: <%= item.rarity.titleize %></p>
-                <p>Description:<%= item.description %></p>
-                <p>Power: <%= item.power %></p>
-                <p>Price: <%= item.listed_price %></p>
-            </div>
+        <div class="parent-cont">
+          <% @this_trader.items.each do |item| %>
+            <% if item.listed == true %>
+              <div class="item-container">
+                  <% if item.icon.attached? %>
+                  <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+                  <% end %>
+                  <p>Name: <%= item.name.titleize %></p>
+                  <p>Type: <%= item.item_type.titleize %></p>
+                  <p>Rarity: <%= item.rarity.titleize %></p>
+                  <p>Description: <%= item.description %></p>
+                  <p>Power: <%= item.power %></p>
+                  <p>Price: <%= item.listed_price %></p>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
     </div>
     <div class="dash-cont">
         <h3>Equipped Items</h3>
-        <% @this_trader.items.each do |item| %>
-          <% if item.equipped == true %>
-            <div class="item-container">
-                <% if item.icon.attached? %>
-                <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
-                <% end %>
-                <p>Name: <%= item.name.titleize %></p>
-                <p>Type: <%= item.item_type.titleize %></p>
-                <p>Rarity: <%= item.rarity.titleize %></p>
-                <p>Description:<%= item.description %></p>
-                <p>Power: <%= item.power %></p>
-            </div>
+        <div class="parent-cont">
+          <% @this_trader.items.each do |item| %>
+            <% if item.equipped == true %>
+              <div class="item-container">
+                  <% if item.icon.attached? %>
+                  <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+                  <% end %>
+                  <p>Name: <%= item.name.titleize %></p>
+                  <p>Type: <%= item.item_type.titleize %></p>
+                  <p>Rarity: <%= item.rarity.titleize %></p>
+                  <p>Description: <%= item.description %></p>
+                  <p>Power: <%= item.power %></p>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
     </div>
-  </div>
+</div>

@@ -209,7 +209,8 @@ class TradersController < ApplicationController
   end
   
   def cancel
-    render plain: "CANCELLED!"
+    flash[:notice] = "TRANSACTION CANCELLED!"
+    redirect_to root_path
   end
 
   private

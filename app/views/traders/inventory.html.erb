@@ -1,5 +1,5 @@
 <div class="dash-body">
-    <div class="dash-cont">
+    <div class="inv-dash-cont">
         <h1>Inventory</h1>
         <div class="parent-cont">
         <% @items.each do |item| %>
@@ -10,7 +10,7 @@
                 <p>Name: <%= item.name.titleize %></p>
                 <p>Type: <%= item.item_type.titleize %></p>
                 <p>Rarity: <%= item.rarity.titleize %></p>
-                <p>Description:<%= item.description %></p>
+                <p>Description: <%= item.description %></p>
                 <p>Power: <%= item.power %></p>
                 <p>Worth: <%= item.worth %></p>
                 
@@ -40,10 +40,13 @@
         <% end %>
         </div>
     </div>
-    <div>
+    
+    <div class="min-dash-cont">
         <%= form_with model: @items.first, url: { controller: "items", action: "sort" }, method: 'get', local: true do |f| %>
-        <div>
-            <p>Sort Inventory<% f.label :sort %><br />
+        <h2>Sort Inventory</h2>
+        <div class="parent-cont">
+            <p><% f.label :sort %>
+                <br />
                 Name: <%= f.radio_button :sort, :name %>
                 <br>
                 Rarity: <%= f.radio_button :sort, :rarity %>
@@ -62,16 +65,5 @@
         </div>
         <% end %>
     </div>
-    <div class="dash-cont">
-        <div>
-            <h3><%= current_trader.username.titleize %></h3>
-            <p>Lorem Ipsum Description</p>
-            <h4>Credits: <%= current_trader.credits %></h4>
-            <h4>Strongest Rift Closed: <%= current_trader.highest_rift_level %></h4>
-            <h4>Power Level: <%= @power_level %></h4>
-            <h4>No. of Rifts Closed: <%= current_trader.rifts_closed %></h4>
-            <h4>No. of Items Traded: <%= current_trader.items_traded %></h4>
-            <%= link_to 'Edit Profile', edit_trader_registration_path, method: :get %>
-        </div>
-    </div>
+    <%= render 'partials/trader_profile' %>
 </div>

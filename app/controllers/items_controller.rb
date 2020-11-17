@@ -80,6 +80,7 @@ class ItemsController < ApplicationController
                 curr_owner.update(credits: curr_owner.credits + @item.listed_price, items_traded: curr_owner.items_traded += 1)
                 current_trader.update(credits: current_trader.credits - @item.listed_price)
                 @item.update(trader: current_trader, listed: false, exchange: nil)
+                flash[:alert] = "You now own the #{@item.name.titleize}!"
             else
                 flash[:alert] = "Thats your own item!"
             end

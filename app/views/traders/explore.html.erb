@@ -1,76 +1,100 @@
-<div class="rift-cont">
- <section>
-     <div>
-         <h2>Explore The Rift</h2>
-     </div>
-     <div>
-         <h3>Claim Daily Reward</h3>
-        <% if @claim %>
-            <button><%= link_to "Claim!", claim_path, method: "GET" %></button>
-        <% else %>
+<div class="title">
+    <h1>Explore The Rift</h1>
+</div>
+<div class="dash-body">
+    <div class="rift-cont">
+        <div class="claim-cont">
+            <h3>Claim Daily Reward</h3>
+           <% if @claim %>
+                <div>
+                    <button><%= link_to "Claim!", claim_path, method: "GET" %></button>
+                </div>
+           <% else %>
             <p>You already claimed todays reward! Come back tomorrow!</p>
-        <% end %>
-     </div>
-     <div>
+                <div>
+                </div>
+           <% end %>
+        </div>
+
          <h3>Today's Rifts</h3>
-         <!-- Short Current: <%= @curr_time_conv %>
-         <br>
-         Short Refresh: <%= @refresh_time_conv %>
-         <br>
-         Long Current: <%= @curr_time %>
-         <br>
-         Long Refresh: <%= @refresh_time %> -->
          <% int = 1 %>
 
          <% if @rifts.length > 0 %>
-            <% @rifts.each do |rift| %>
-            <div>
-                <h4><%= "Rift " + int.to_s  %></h4>
-                <% int += 1 %>
-                <% item_int = 1 %>
-                <% rift.items.each do |item| %>
-                    <%= "Item #{item_int}: #{item.name}"%>
-                    <br>
-                    Power: <%= item.power %>
-                    Worth: <%= item.worth %>
-                    <br><br>
-                    <% item_int += 1 %>
-                <% end %>
-                Credits: <%= rift.credits %>
+         <% @rifts.each do |rift| %>
+             <div class="item-container">
+            
+                 <h4><%= "Rift " + int.to_s %></h4>
+                 <% int += 1 %>
+                 <% item_int = 1 %>
+                 <% rift.items.each do |item| %>
+                     <%= "Item #{item_int}: #{item.name}"%>
+                     <br>
+                     Power: <%= item.power %>
+                     Worth: <%= item.worth %>
+                     <br><br>
+                     <% item_int += 1 %>
+                 <% end %>
+                 Credits: <%= rift.credits %>
+            
             </div>
-            <% end %>
+             <% end %>
          <% else %>
-            <p>You've closed all of todays rifts!</p>
-            <P>Hours Until Refresh: <%= @time_until_refresh %></P>
+         <div class="item-container">
+             <p>You've closed all of todays rifts!</p>
+             <P>Hours Until Refresh: <%= @time_until_refresh %></P>
+         </div>
          <% end %>
          
      </div>
-     <div>
-         <% if @rifts.length > 0%>
+     <div class="dash-cont">
          <h3>Choose a Rift</h3>
-         <% int = 1 %>
-            <% @rifts.each do |rift| %>
-                <h4><%= "Rift " + int.to_s  %></h4>
-                <% rift_power = 0 %>
-                <% trader_power = 0 %>
-
-                <% rift.items.each do |item| %>
-                    <% rift_power += item.power %>
+         <div class="parent-cont">
+            <% if @rifts.length > 0%>
+             <% int = 1 %>
+                <% @rifts.each do |rift| %>
+                <div class="item-container">
+                    <h4><%= "Rift " + int.to_s  %></h4>
+                    <% rift_power = 0 %>
+                    <% trader_power = 0 %>
+    
+                    <% rift.items.each do |item| %>
+                        <% rift_power += item.power %>
+                    <% end %>
+    
+                    <h4>Power: <%= rift_power %></h4>
+                    <% current_trader.items.equipped.each do |item| %>
+                        <% trader_power += item.power %>
+                    <% end %>
+    
+                    <% rift_success_like = ((trader_power - rift_power) ** 3) * 0.05 + 50 %>
+    
+                    <h4>Chance of Success: <%= "%0.2f" % [rift_success_like] %>%</h4>
+                    <button><%= link_to "Close This Rift!", close_path(rift), method: "DELETE" %></button>
+                </div>
                 <% end %>
-
-                <h4>Power: <%= rift_power %></h4>
-                <% current_trader.items.equipped.each do |item| %>
-                    <% trader_power += item.power %>
-                <% end %>
-
-                <% rift_success_like = ((trader_power - rift_power) ** 3) * 0.05 + 50 %>
-
-                <h4>Chance of Success: <%= "%0.2f" % [rift_success_like] %>%</h4>
-                <button><%= link_to "Close This Rift!", close_path(rift), method: "DELETE" %></button>
-
             <% end %>
-        <% end %>
+         </div>
      </div>
-
- </section>
+     <div class="dash-cont">
+        <h3>Equipped Items</h3>
+        <div class="parent-cont">
+        <% current_trader.items.each do |item| %>
+          <% if item.equipped == true %>
+            <div class="item-container">
+                <% if item.icon.attached? %>
+                <%= cl_image_tag(item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+                <% end %>
+                <p><%= item.name.titleize %></p>
+                <p>Type: <%= item.item_type.titleize %></p>
+                <p>Rarity: <%= item.rarity.titleize %></p>
+                <p>Description: <%= item.description %></p>
+                <p>Power: <%= item.power %></p>
+            </div>
+          <% end %>
+        <% end %>
+        </div>
+        <div>
+          <%= link_to 'Edit Inventory', inventory_path, method: :get %>
+        </div>
+    </div>
 </div>

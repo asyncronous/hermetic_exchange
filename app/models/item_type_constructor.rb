@@ -1,7 +1,7 @@
 class ItemTypeConstructor < ApplicationRecord
     before_save  :downcase_fields
     before_create :set_icons
-    has_one_attached :icon, dependent: :destroy
+    has_one_attached :icon, dependent: :purge
 
     validates_format_of :item_type, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
     validates :item_type, uniqueness: true, presence: true
