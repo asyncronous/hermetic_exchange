@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # resources :rifts
 
   #
+  # admin
+  put '/traders/:id/make_admin', to: 'traders#make_admin', as: 'make_admin'
+  put '/traders/:id/unmake_admin', to: 'traders#unmake_admin', as: 'unmake_admin'
 
   #admin create item and variant routes
   post '/item_premium', to: 'items#create_premium', as: 'items_create_premium'
