@@ -1,13 +1,15 @@
 class Item < ApplicationRecord
-    before_create :set_random_attributes
+    before_validation :set_random_attributes
 
-    # attribute :name, default: "Name"
-    # attribute :item_type, default: "Type"
-    # attribute :rarity, default: "Rarity"
-    attribute :description, default: "Description"
-    # attribute :power, default: 1
-    # attribute :worth, default: 100
-    # attribute :listed_price, default: 100
+    validates_format_of :name, with: /^[a-zA-Z0-9_\. ]*$/, :multiline => true
+    validates_format_of :item_type, with: /^[a-zA-Z0-9_\. ]*$/, :multiline => true
+    validates_format_of :rarity, with: /^[a-zA-Z0-9_\. ]*$/, :multiline => true
+
+    validates :name, presence: true
+    validates :item_type, presence: true
+    validates :rarity, presence: true
+
+    attribute :description, default: BetterLorem.w(4,true,false)
     attribute :listed, default: false
     attribute :equipped, default: false
 
@@ -56,6 +58,7 @@ class Item < ApplicationRecord
             self.power = var_constructor.power.sample
             self.worth = self.power * 100
             self.listed_price = self.worth
+            self.description = BetterLorem.w(4,true,false)
         else
             if type_constructors.exists?(item_type: self.item_type)
                 type = type_constructors.find_by item_type: self.item_type

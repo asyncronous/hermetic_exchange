@@ -60,3 +60,5 @@ gem "cloudinary"
 gem "activestorage-cloudinary-service"
 
 gem "stripe"
+
+gem 'betterlorem'

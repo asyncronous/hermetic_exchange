@@ -13,9 +13,9 @@ class Rift < ApplicationRecord
   belongs_to :trader
 
   def set_items
-    self.items.create
-    self.items.create
-    self.items.create
+    self.items.create!
+    self.items.create!
+    self.items.create!
     self.credits = rand(100..200)
   end
 end

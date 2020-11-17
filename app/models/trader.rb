@@ -3,6 +3,8 @@ class Trader < ApplicationRecord
   before_create :set_default_avatar
   after_create :generate_starter_inv
 
+  before_destroy :purge_rift_items
+
   attr_writer :login
   
   # Include default devise modules. Others available are:
@@ -27,6 +29,14 @@ class Trader < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :rifts, dependent: :destroy
   has_one_attached :avatar, dependent: :purge
+
+  def purge_rift_items
+    self.rifts.each do |rift|
+      if rift.items
+        rift.items.destroy_all
+      end
+    end
+  end
 
   def downcase_fields
     self.username.downcase!
@@ -54,7 +64,7 @@ class Trader < ApplicationRecord
 
   def generate_starter_inv
     if !self.has_role?(:admin)
-      self.items.create(equipped: true)
+      self.items.create!(equipped: true)
     end
   end
 end

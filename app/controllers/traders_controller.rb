@@ -18,7 +18,7 @@ class TradersController < ApplicationController
   def claim
     if trader_signed_in?
       if current_trader.claimed_daily == false
-        item = current_trader.items.create
+        item = current_trader.items.create!
         credits = rand(100..200)
         current_trader.update(claimed_daily: true, credits: (current_trader.credits += credits))
         flash[:notice] = "#{item.name.capitalize} and #{credits} Credits claimed!"
@@ -106,8 +106,8 @@ class TradersController < ApplicationController
           @rifts.destroy_all
         end 
         
-        current_trader.rifts.create
-        current_trader.rifts.create
+        current_trader.rifts.create!
+        current_trader.rifts.create!
 
         @rifts = current_trader.rifts
       else
@@ -136,13 +136,6 @@ class TradersController < ApplicationController
       end
 
     end
-  end
-
-  #messenger
-  def messenger
-    # if trader_signed_in?
-    #     @items = current_trader.items
-    # end
   end
 
   #search

@@ -3,6 +3,9 @@ class ItemTypeConstructor < ApplicationRecord
     before_create :set_icons
     has_one_attached :icon, dependent: :destroy
 
+    validates_format_of :item_type, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+    validates :item_type, uniqueness: true, presence: true
+
     def set_icons
         path = "app/assets/images/Icons/#{self.item_type.downcase}.png"
         if !self.icon.attached?

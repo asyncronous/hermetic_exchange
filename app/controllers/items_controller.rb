@@ -3,8 +3,17 @@ class ItemsController < ApplicationController
     before_action :check_roles, only: [:new_premium, :create_premium, :new_variant, :create_variant]
 
     def create_premium
-        current_trader.items.create(premium_params)
-        redirect_to root_path
+        item = current_trader.items.new(premium_params)
+        if item.valid?
+            item.save
+            flash[:notice] = "New Premium Item #{item.name.titleize} created!"
+            # return redirect_to root_path
+        else
+            flash[:notice] = "Item invalid, #{item.errors.full_messages[0]}, must only use alpha characters!"
+            return redirect_to items_new_premium_path
+        end
+
+        return redirect_to root_path
     end
 
     def new_premium
@@ -12,10 +21,16 @@ class ItemsController < ApplicationController
     end
 
     def create_variant
-        # item = Item.create(menu_item_params)
-        # redirect_to menu_item_path(item)
         if item_type_params != nil
-            item_type = ItemTypeConstructor.create(item_type_params) 
+            item_type = ItemTypeConstructor.new(item_type_params)
+            if item_type.valid?
+                item_type.save
+                flash[:notice] = "New Variant #{item_type.item_type.capitalize} created!"
+            else
+                flash[:notice] = "Item type invalid, use only alpha characters!"
+                redirect_to items_new_variant_path
+            end
+            
         end
 
         if item_var_params != nil
@@ -25,8 +40,9 @@ class ItemsController < ApplicationController
             item_variant.power << item_var_params[:power]
             item_variant.save
         end
-        redirect_to root_path
-      end
+
+        return redirect_to root_path
+    end
     
     def new_variant
         @item_type = ItemTypeConstructor.new
