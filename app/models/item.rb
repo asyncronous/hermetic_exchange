@@ -35,7 +35,7 @@ class Item < ApplicationRecord
 
         type_constructors = ItemTypeConstructor.all
 
-        if !trader_inst.has_role?(:admin)
+        if !trader_inst.has_role?(:admin) && self.name == nil
             var_constructor = ItemVariantConstructor.first
             # type_constructors = ItemTypeConstructor.all
             rand_type = type_constructors.sample
