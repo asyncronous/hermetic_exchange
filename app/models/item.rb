@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-    before_validation :set_random_attributes
+    before_validation_on_create :set_random_attributes
 
     validates_format_of :name, with: /^[a-zA-Z0-9_\. ]*$/, :multiline => true
     validates_format_of :item_type, with: /^[a-zA-Z0-9_\. ]*$/, :multiline => true
