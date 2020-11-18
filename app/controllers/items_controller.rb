@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
             flash[:notice] = "Item #{item.name.titleize} updated!"
         else
             flash[:notice] = "Item invalid, #{item.errors.full_messages[0]}, must only use alpha characters!"
-            return redirect_to items_new_premium_path
+            return redirect_to item_edit_admin_path
         end
 
         return redirect_to exchange_path
