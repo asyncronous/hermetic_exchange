@@ -1,13 +1,12 @@
 class ItemsController < ApplicationController
     before_action :authenticate_trader!
-    before_action :check_roles, only: [:new_premium, :create_premium, :new_variant, :create_variant]
+    before_action :check_roles, only: [:new_premium, :create_premium, :new_variant, :create_variant, :edit_admin, :update_admin, :show_item_types, :show, :destroy]
 
     def create_premium
         item = current_trader.items.new(premium_params)
         if item.valid?
             item.save
             flash[:notice] = "New Premium Item #{item.name.titleize} created!"
-            # return redirect_to root_path
         else
             flash[:notice] = "Item invalid, #{item.errors.full_messages[0]}, must only use alpha characters!"
             return redirect_to items_new_premium_path
@@ -18,6 +17,44 @@ class ItemsController < ApplicationController
 
     def new_premium
         @item = Item.new
+    end
+
+    def show 
+        @item = Item.find(params[:id])
+    end
+
+    def destroy
+        @item = Item.find(params[:id])
+
+        flash[:notice] = "Item destroyed!"
+
+        @item.destroy
+        redirect_to inventory_path
+    end
+
+    def edit_admin 
+        @item = Item.find(params[:id])
+    end
+
+    def update_admin 
+        # p params[:id]
+        item = Item.find(params[:id])
+        
+        item.assign_attributes(premium_params)
+        if item.valid?
+            item.save
+            flash[:notice] = "Item #{item.name.titleize} updated!"
+        else
+            flash[:notice] = "Item invalid, #{item.errors.full_messages[0]}, must only use alpha characters!"
+            return redirect_to items_new_premium_path
+        end
+
+        return redirect_to exchange_path
+    end
+
+    def show_item_types 
+        @item_types = ItemTypeConstructor.all 
+        @item_var = ItemVariantConstructor.first
     end
 
     def create_variant
@@ -47,6 +84,14 @@ class ItemsController < ApplicationController
     def new_variant
         @item_type = ItemTypeConstructor.new
         @item_variant = ItemVariantConstructor.new
+    end
+
+    def delete_variant
+        @item_type = ItemTypeConstructor.find(params[:id])
+        flash[:notice] = "Variant #{@item_type.item_type.capitalize} destroyed!"
+        @item_type.destroy
+
+        redirect_to show_item_types_path
     end
     
     def update
@@ -108,9 +153,12 @@ class ItemsController < ApplicationController
 
     def destroy
         @item = Item.find(params[:id])
+
         current_trader.update(credits: current_trader.credits + @item.worth)
         flash[:notice] = "Item dismantled! Gained #{@item.worth} Credits!"
+
         @item.destroy
+
         redirect_to inventory_path
     end
 

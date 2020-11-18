@@ -1,6 +1,6 @@
-<h2> Create new Premium Item!</h2>
+<h2> Update item! </h2>
 
-<%= form_with model: @item, url: { controller: "items", action: "create_premium" }, local: true do |f| %>
+<%= form_with model: @item, url: { controller: "items", action: "update_admin" }, local: true do |f| %>
 <div>
     <%= f.label :icon %>
     <%= f.file_field :icon, required: true %>

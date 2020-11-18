@@ -15,8 +15,15 @@ Rails.application.routes.draw do
   post '/item_premium', to: 'items#create_premium', as: 'items_create_premium'
   get '/item_premium', to: 'items#new_premium', as: 'items_new_premium'
 
+  get '/item/:id/item_edit_admin/', to: 'items#edit_admin', as: 'item_edit_admin'
+  patch '/item/:id/item_premium/', to: 'items#update_admin', as: 'item_update_admin'
+  delete '/item/:id/destroy_admin/', to: 'items#destroy_admin', as: 'item_delete_admin'
+
+  delete '/item_variant/:id', to: 'items#delete_variant', as: 'items_delete_variant'
   post '/item_variant', to: 'items#create_variant', as: 'items_create_variant'
   get '/item_variant', to: 'items#new_variant', as: 'items_new_variant'
+  get '/item_variants', to: 'items#show_item_types', as: 'show_item_types'
+
 
   #buy item
   put '/item/:id/buy', to: 'items#buy', as: 'items_buy'
