@@ -19,9 +19,8 @@
         <br>
         <% if current_trader.has_role?(:admin) %>
           <%= link_to 'Create Item Variants', items_new_variant_path, method: :get %>
-          <br>
+          <%= link_to 'Show All Item Variants', show_item_types_path, method: :get %>
           <%= link_to 'Create Premium Items', items_new_premium_path, method: :get %>
-          <br>
         <% end %>
     </div>
 </div>

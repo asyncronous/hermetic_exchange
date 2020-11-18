@@ -151,6 +151,14 @@ button{
     margin: 2px;
 }
 
+.type-body{
+    // border: 1px solid ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+}
+
 .parent-cont{
     // border: 1px solid ;
     display: grid;
@@ -274,6 +282,8 @@ img{
         }
     }
 }
+
+
 
 .rift-cont{
     display: flex;

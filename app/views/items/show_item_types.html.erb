@@ -1,31 +1,19 @@
-<h2> View all item types and variants</h2>
+<div class="title">
+    <h2> View all item types</h2>
+</div>
 
-<h3>Item Types</h3>
-<% @item_types.each do |type| %>
-    <div>
-        <% if type.icon.attached? %>
-        <%= cl_image_tag(type.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
-        <% end %>
-        <%= type.item_type %>
-        <button><%= link_to "Delete", items_delete_variant_path(type), method: :delete, data: {confirm: "Are you sure?" } %></button>
+<div class="type-body">
+    <div class= "inv-dash-cont">
+        <div class="parent-cont">
+            <% @item_types.each do |type| %>
+                <div class="item-container">
+                    <% if type.icon.attached? %>
+                    <%= cl_image_tag(type.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+                    <% end %>
+                    <%= type.item_type.titleize %>
+                    <button><%= link_to "Delete", items_delete_variant_path(type), method: :delete, data: {confirm: "Are you sure?" } %></button>
+                </div>
+            <% end %>
+        </div>
     </div>
-<% end %>
-<!-- 
-<h3>Item Effects</h3>
-<% @item_var.effects.each do  |effect|%>
-    <div>
-        <%= effect %>
-    </div>
-<% end %>
-<h3>Item Rarities</h3>
-<% @item_var.rarities.each do |rarity|%>
-    <div>
-        <%= rarity %>
-    </div>
-<% end %>
-<h3>Item Power Levels</h3>
-<% @item_var.power.each do |power_lvl|%>
-    <div>
-        <%= power_lvl %>
-    </div>
-<% end %> -->
+</div>

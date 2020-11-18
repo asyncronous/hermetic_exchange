@@ -26,7 +26,7 @@
                     <p>Description: <%= item.description %></p>
                     <p>Power: <%= item.power %></p>
                     <p>Price: <%= item.listed_price %></p>
-                    <button><%= link_to "Buy!", items_buy_path(item), method: "PUT", data: {confirm: "Are you sure?" } %></button>
+                    <%= link_to 'View Item', item_path(item), method: :get %>
                 </div>
             <% end %>
         </div>
@@ -50,7 +50,7 @@
                 <p>Description: <%= item.description %></p>
                 <p>Power: <%= item.power %></p>
                 <p>Price: <%= item.listed_price %></p>
-                <button><%= link_to "Buy!", items_buy_path(item), method: "PUT", data: {confirm: "Are you sure?" } %></button>
+                <%= link_to 'View Item', item_path(item), method: :get %>
             </div>
         <% end %>
         </div>

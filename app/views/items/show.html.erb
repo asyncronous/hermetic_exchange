@@ -1,12 +1,21 @@
-<% if @item.icon.attached? %>
-<%= cl_image_tag(@item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
-<% end %>
-<p>Name: <%= @item.name.titleize %></p>
-<p>Type: <%= @item.item_type.titleize %></p>
-<p>Rarity: <%= @item.rarity.titleize %></p>
-<p>Description: <%= @item.description %></p>
-<p>Power: <%= @item.power %></p>
-<p>Worth: <%= @item.worth %></p>
+<div class="title">
+    <h2>View Item</h2>
 
-<button><%= link_to "Edit", item_edit_admin_path(@item), method: :get, data: {confirm: "Are you sure?" } %></button>
-<button><%= link_to "Delete", item_delete_admin_path(@item), method: :delete, data: {confirm: "Are you sure?" } %></button>
+    <div class="item-container">
+        <% if @item.icon.attached? %>
+        <%= cl_image_tag(@item.icon.key, crop: :scale, width: 100, cloud_name: ENV["CLOUDINARY_CLOUDNAME"]) %>
+        <% end %>
+        <p>Name: <%= @item.name.titleize %></p>
+        <p>Type: <%= @item.item_type.titleize %></p>
+        <p>Rarity: <%= @item.rarity.titleize %></p>
+        <p>Description: <%= @item.description %></p>
+        <p>Power: <%= @item.power %></p>
+        <p>Worth: <%= @item.worth %></p>
+        <% if current_trader.has_role?(:admin) %>
+            <button><%= link_to "Edit", item_edit_admin_path(@item), method: :get, data: {confirm: "Are you sure?" } %></button>
+            <button><%= link_to "Delete", item_delete_admin_path(@item), method: :delete, data: {confirm: "Are you sure?" } %></button>
+        <% else %>
+            <button><%= link_to "Buy!", items_buy_path(@item), method: "PUT", data: {confirm: "Are you sure?" } %></button>
+        <% end %>
+    </div>
+</div>

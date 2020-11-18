@@ -1,31 +1,31 @@
-<h2> Create new Item Variants or Types!</h2>
-
-<%= form_with model: @item_type, url: { controller: "items", action: "create_variant" }, local: true do |f| %>
-<div>
-    <%= f.label :item_type %>
-    <%= f.text_field :item_type, placeholder: "dagger", required: true %>
-
-    <%= f.label :icon %>
-    <%= f.file_field :icon, required: true %>
+<div class="title">
+    <h2> Create new Item Variants or Types!</h2>
+    
+    <%= form_with model: @item_type, url: { controller: "items", action: "create_variant" }, local: true do |f| %>
+    <div>
+        <%= f.label :item_type %>
+        <%= f.text_field :item_type, placeholder: "dagger", required: true %>
+    
+        <%= f.label :icon %>
+        <%= f.file_field :icon, required: true %>
+    </div>
+    <div>
+        <%= f.submit %>
+    </div>
+    <% end %>
+    <br>
+    <%= form_with model: @item_variant, url: { controller: "items", action: "create_variant" }, local: true do |f| %>
+    <div>
+        <%= f.label :effect %>
+        <%= f.text_field :effect, placeholder: "frost" %>
+        <%= f.label :rarity %>
+        <%= f.text_field :rarity, placeholder: "unique" %>
+        <%= f.label :power %>
+        <%= f.number_field :power, placeholder: 1 %>
+    
+    </div>
+    <div>
+        <%= f.submit %>
+    </div>
+    <% end %>
 </div>
-<br>
-<div>
-    <%= f.submit %>
-</div>
-<% end %>
-<br>
-<%= form_with model: @item_variant, url: { controller: "items", action: "create_variant" }, local: true do |f| %>
-<div>
-    <%= f.label :effect %>
-    <%= f.text_field :effect, placeholder: "frost" %>
-    <%= f.label :rarity %>
-    <%= f.text_field :rarity, placeholder: "unique" %>
-    <%= f.label :power %>
-    <%= f.number_field :power, placeholder: 1 %>
-
-</div>
-<br>
-<div>
-    <%= f.submit %>
-</div>
-<% end %>

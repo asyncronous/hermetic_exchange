@@ -1,40 +1,42 @@
-<h2> Create new Premium Item!</h2>
-
-<%= form_with model: @item, url: { controller: "items", action: "create_premium" }, local: true do |f| %>
-<div>
-    <%= f.label :icon %>
-    <%= f.file_field :icon, required: true %>
-    <br>
+<div class="title">
+    <h2> Create new Premium Item!</h2>
     
-    <%= f.label :name %>
-    <%= f.text_field :name, placeholder: "dagger of pestilence", required: true %>
+    <%= form_with model: @item, url: { controller: "items", action: "create_premium" }, local: true do |f| %>
+    <div>
+        <%= f.label :icon %>
+        <%= f.file_field :icon, required: true %>
+        <br>
+        
+        <%= f.label :name %>
+        <%= f.text_field :name, placeholder: "dagger of pestilence", required: true %>
+        <br>
+    
+        <%= f.label :item_type %>
+        <%= f.text_field :item_type, placeholder: "dagger", required: true %>
+        <br>
+    
+        <%= f.label :rarity %>
+        <%= f.text_field :rarity, value: "premium", required: true %>
+        <!-- <br> -->
+    
+        <%= f.label :description %>
+        <%= f.text_field :description, placeholder: "Lorem Ipsum", required: true %>
+        <br>
+    
+        <%= f.label :power %>
+        <%= f.number_field :power, value: 100, required: true %>
+        <br>
+    
+        <%= f.label :worth %>
+        <%= f.number_field :worth, value: 10000, required: true %>
+        <br>
+    
+        <%= f.label :listed_price %>
+        <%= f.number_field :listed_price, value: 10000, required: true %>
+    </div>
     <br>
-
-    <%= f.label :item_type %>
-    <%= f.text_field :item_type, placeholder: "dagger", required: true %>
-    <br>
-
-    <%= f.label :rarity %>
-    <%= f.text_field :rarity, value: "premium", required: true %>
-    <!-- <br> -->
-
-    <%= f.label :description %>
-    <%= f.text_field :description, placeholder: "Lorem Ipsum", required: true %>
-    <br>
-
-    <%= f.label :power %>
-    <%= f.number_field :power, value: 100, required: true %>
-    <br>
-
-    <%= f.label :worth %>
-    <%= f.number_field :worth, value: 10000, required: true %>
-    <br>
-
-    <%= f.label :listed_price %>
-    <%= f.number_field :listed_price, value: 10000, required: true %>
+    <div>
+        <%= f.submit %>
+    </div>
+    <% end %>
 </div>
-<br>
-<div>
-    <%= f.submit %>
-</div>
-<% end %>

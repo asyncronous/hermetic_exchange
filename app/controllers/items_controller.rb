@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
     before_action :authenticate_trader!
-    before_action :check_roles, only: [:new_premium, :create_premium, :new_variant, :create_variant, :edit_admin, :update_admin, :show_item_types, :show, :destroy]
+    before_action :check_roles, only: [:new_premium, :create_premium, :new_variant, :create_variant, :edit_admin, :update_admin, :show_item_types, :destroy_admin]
 
     def create_premium
         item = current_trader.items.new(premium_params)
@@ -21,15 +21,21 @@ class ItemsController < ApplicationController
 
     def show 
         @item = Item.find(params[:id])
+
+        if @item.listed == false
+            flash[:notice] = "That Item isn't listed on the exchange!"
+            redirect_to exchange_path
+        end
     end
 
-    def destroy
+    def destroy_admin
         @item = Item.find(params[:id])
 
         flash[:notice] = "Item destroyed!"
 
         @item.destroy
-        redirect_to inventory_path
+
+        redirect_to exchange_path
     end
 
     def edit_admin 
