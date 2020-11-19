@@ -133,10 +133,11 @@ class ItemsController < ApplicationController
   def find
     search_string = item_params[:input].downcase
 
-    @found_items = Item.where(listed: true).where("name like ?", "%#{search_string}%").or(
-      Item.where(listed: true).where("rarity like ?", "%#{search_string}%")
+    # find all exchange listed items by partial name, rarity, or item_type
+    @found_items = Exchange.first.items.where("name like ?", "%#{search_string}%").or(
+      Exchange.first.items.where("rarity like ?", "%#{search_string}%")
     ).or(
-      Item.where(listed: true).where("item_type like ?", "%#{search_string}%")
+      Exchange.first.items.where("item_type like ?", "%#{search_string}%")
     )
 
     item_ids = @found_items.map(&:id)

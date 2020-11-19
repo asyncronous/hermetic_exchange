@@ -26,12 +26,14 @@ class TradersController < ApplicationController
   #marketplace
   def exchange
     @item = Item.new
+    #get all the exchange items 
     @exchange_listed = Exchange.first.items.where(rarity: "premium")
 
     if params[:passed_param] != nil
       @searched_items = Item.find(params[:passed_param])
     else
-      @searched_items = Item.where(listed: true).order(:listed_price).reverse_order.first(5)
+      #search items on the exchange, reverse order so get the most expensive, display the first 5
+      @searched_items = Exchange.first.items.order(:listed_price).reverse_order.first(5)
     end
   end
 
@@ -164,6 +166,7 @@ class TradersController < ApplicationController
       @searched_traders = []
       @searched_traders = Trader.find(params[:passed_param])
     else
+      # get the first 5 traders in order by username
       @searched_traders = Trader.all.order(:username).first(5)
     end
 
@@ -173,6 +176,7 @@ class TradersController < ApplicationController
   def find
     search_string = trader_params[:login].downcase
 
+    # check search for any trader where the search string partially matches the username of any trader, or where the search string partially matches the email or any trader
     @found_traders = Trader.where("username like ?", "%#{search_string}%").or(Trader.where("email like ?", "%#{search_string}%"))
     trader_ids = @found_traders.map(&:id)
     if @found_traders != nil
