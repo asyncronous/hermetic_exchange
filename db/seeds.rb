@@ -30,7 +30,7 @@ ItemTypeConstructor.create!(constructors)
 ItemVariantConstructor.create!(
     effects: [
         "lightning",
-        "corrupton",
+        "corruption",
         "divinity",
         "agony",
         "wisdom",
@@ -65,12 +65,6 @@ Exchange.create!(name: "Exchange")
 
 user = Trader.create!(username: "user", email: "a@b.com", password: "111111", password_confirmation: "111111", credits: 100, highest_rift_level: 0, rifts_closed: 0, items_traded: 0)
 
-user.items.create
-user.items.create
-user.items.create
-user.items.create
-
-user.rifts.create
 user.rifts.create
 user.rifts.create
 
@@ -79,3 +73,4 @@ admin = Trader.create!(username: "admin", email: "admin@exchange.com", password:
 admin.add_role(:admin)
 
 admin.items.create(name: "staff of horror", item_type: "staff", rarity: "premium", description: "Lorem Ipsum", power: 666, worth: 66666, listed_price: 66666, listed: true, exchange: Exchange.first)
+admin.items.create(name: "dagger of omnipotence", item_type: "dagger", rarity: "premium", description: "Lorem Ipsum", power: 666, worth: 66666, listed_price: 66666, listed: true, exchange: Exchange.first)
