@@ -2,26 +2,24 @@ class TradersController < ApplicationController
   before_action :authenticate_trader!
   before_action :check_roles, only: :explore
   before_action :check_admin, only: [:destroy, :make_admin, :unmake_admin]
+  before_action :check_admin_auth, only: :show
   protect_from_forgery except: :purchase
 
   def destroy
-    trader = Trader.find(params[:id])
-    flash[:notice] = "#{trader.username.capitalize}'s account has been terminated!"
-    trader.destroy 
+    flash[:notice] = "#{@trader.username.capitalize}'s account has been terminated!"
+    @trader.destroy 
     redirect_to search_path
   end
 
   def make_admin
-    trader = Trader.find(params[:id])
-    trader.add_role(:admin)
-    flash[:notice] = "#{trader.username.capitalize} is now an administrator"
+    @trader.add_role(:admin)
+    flash[:notice] = "#{@trader.username.capitalize} is now an administrator"
     redirect_to search_path
   end
 
   def unmake_admin
-    trader = Trader.find(params[:id])
-    trader.remove_role(:admin)
-    flash[:notice] = "#{trader.username.capitalize} is no longer an administrator"
+    @trader.remove_role(:admin)
+    flash[:notice] = "#{@trader.username.capitalize} is no longer an administrator"
     redirect_to search_path
   end
 
@@ -186,7 +184,6 @@ class TradersController < ApplicationController
   end
 
   def show
-    @this_trader = Trader.find(params[:id])
   end
 
   def buy_credits
@@ -244,10 +241,19 @@ class TradersController < ApplicationController
   end
 
   def check_admin
+    #get trader by id in the html route
+    @trader = Trader.find(params[:id])
+
     if !(trader_signed_in? && current_trader.has_role?(:admin))
         flash[:alert] = "You do not have the credentials for this!"
         redirect_to root_path
-    else
+    end
+  end
+
+  def check_admin_auth
+    @trader = Trader.find(params[:id])
+    @admin = false
+    if current_trader.has_role?(:admin)
       @admin = true
     end
   end

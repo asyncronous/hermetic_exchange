@@ -23,7 +23,7 @@
          <% @rifts.each do |rift| %>
              <div class="item-container">
             
-                 <h4><%= "Rift " + int.to_s %></h4>
+                 <h4><%= rift.name %></h4>
                  <% int += 1 %>
                  <% item_int = 1 %>
                  <% rift.items.each do |item| %>
@@ -53,7 +53,7 @@
              <% int = 1 %>
                 <% @rifts.each do |rift| %>
                 <div class="item-container">
-                    <h4><%= "Rift " + int.to_s  %></h4>
+                    <h4><%= rift.name %></h4>
                     <% rift_power = 0 %>
                     <% trader_power = 0 %>
     

@@ -1,5 +1,6 @@
 class Rift < ApplicationRecord
   after_create :set_items
+  before_create :set_name
 
   items = [
     Item.new,
@@ -8,9 +9,14 @@ class Rift < ApplicationRecord
   ]
 
   attribute :credits, default: rand(100..200)
+  attribute :name, default: BetterLorem.w(2,true,false)
   
   has_many :items
   belongs_to :trader
+
+  def set_name 
+    self.name = BetterLorem.w(2,true,false)
+  end
 
   def set_items
     self.items.create!
