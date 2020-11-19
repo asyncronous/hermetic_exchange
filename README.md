@@ -138,32 +138,32 @@ Additionally, interdimensional wizards will probably get a kick out of it.
 ## Wireframes/Screenshots
 
 Home Page
-![Home-Page-Wireframe](./docs/screenshots/home_wire.png)
-![Home-Page-Screen](./docs/screenshots/home_screen.png)
+![Home-Page-Wireframe](./docs/Screenshots/home_wire.png)
+![Home-Page-Screen](./docs/Screenshots/home_screen.png)
 
 Dashboard Page
-![Dash-Page-Wireframe](./docs/screenshots/dash_wire.png)
-![Dash-Page-Screen](./docs/screenshots/dash_screen.png)
+![Dash-Page-Wireframe](./docs/Screenshots/dash_wire.png)
+![Dash-Page-Screen](./docs/Screenshots/dash_screen.png)
 
 Explore Page
-![Explore-Page-Wireframe](./docs/screenshots/explore_wire.png)
-![Explore-Page-Screen](./docs/screenshots/explore_screen.png)
+![Explore-Page-Wireframe](./docs/Screenshots/explore_wire.png)
+![Explore-Page-Screen](./docs/Screenshots/explore_screen.png)
 
 Exchange Page
-![Exchange-Page-Wireframe](./docs/screenshots/exchange_wire.png)
-![Exchange-Page-Screen](./docs/screenshots/exchange_screen.png)
+![Exchange-Page-Wireframe](./docs/Screenshots/exchange_wire.png)
+![Exchange-Page-Screen](./docs/Screenshots/exchange_screen.png)
 
 Inventory Page
-![Inventory-Page-Wireframe](./docs/screenshots/inv_wire.png)
-![Inventory-Page-Screen](./docs/screenshots/inv_screen.png)
+![Inventory-Page-Wireframe](./docs/Screenshots/inv_wire.png)
+![Inventory-Page-Screen](./docs/Screenshots/inv_screen.png)
 
 Search Page
-![Search-Page-Wireframe](./docs/screenshots/search_wire.png)
-![Search-Page-Screen](./docs/screenshots/search_screen.png)
+![Search-Page-Wireframe](./docs/Screenshots/search_wire.png)
+![Search-Page-Screen](./docs/Screenshots/search_screen.png)
 
 Mobile Pages
-![Mobile-Page-Wireframe](./docs/screenshots/mobile_wire.png)
-![Mobile-Page-Screen](./docs/screenshots/mobile_screen.jpg)
+![Mobile-Page-Wireframe](./docs/Screenshots/mobile_wire.png)
+![Mobile-Page-Screen](./docs/Screenshots/mobile_screen.jpg)
 
 
 ## High-Level Component Description
