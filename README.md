@@ -361,7 +361,7 @@ Rifts has a random Lorem Ipsum name, a random number of credits, and a reference
     - The exchange reference is null by default and added only when the item is listed on the exchange
 
 #### Item Constructors:
-![Item-Constructor1-Schema](docs/schema/item_type_schema.png)
+![Item-Constructor1-Schema](docs/schema/Item_type_schema.png)
 ![Item-Constructor2-Schema](docs/schema/item_var_schema.png)
 
 - Item types are simply strings, with active storage attachments
