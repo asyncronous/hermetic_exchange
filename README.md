@@ -72,7 +72,7 @@ The purpose of the app is to provide a two-way marketplace for users to sell the
 
 ### Sitemap
 
-![Sitemap-Image](docs/sitemap.png) 
+![Sitemap-Image](./docs/sitemap.png) 
 
 ### Target Audience
 
@@ -138,32 +138,32 @@ Additionally, interdimensional wizards will probably get a kick out of it.
 ## Wireframes/Screenshots
 
 Home Page
-![Home-Page-Wireframe](docs/screenshots/home_wire.png)
-![Home-Page-Screen](docs/screenshots/home_screen.png)
+![Home-Page-Wireframe](./docs/screenshots/home_wire.png)
+![Home-Page-Screen](./docs/screenshots/home_screen.png)
 
 Dashboard Page
-![Dash-Page-Wireframe](docs/screenshots/dash_wire.png)
-![Dash-Page-Screen](docs/screenshots/dash_screen.png)
+![Dash-Page-Wireframe](./docs/screenshots/dash_wire.png)
+![Dash-Page-Screen](./docs/screenshots/dash_screen.png)
 
 Explore Page
-![Explore-Page-Wireframe](docs/screenshots/explore_wire.png)
-![Explore-Page-Screen](docs/screenshots/explore_screen.png)
+![Explore-Page-Wireframe](./docs/screenshots/explore_wire.png)
+![Explore-Page-Screen](./docs/screenshots/explore_screen.png)
 
 Exchange Page
-![Exchange-Page-Wireframe](docs/screenshots/exchange_wire.png)
-![Exchange-Page-Screen](docs/screenshots/exchange_screen.png)
+![Exchange-Page-Wireframe](./docs/screenshots/exchange_wire.png)
+![Exchange-Page-Screen](./docs/screenshots/exchange_screen.png)
 
 Inventory Page
-![Inventory-Page-Wireframe](docs/screenshots/inv_wire.png)
-![Inventory-Page-Screen](docs/screenshots/inv_screen.png)
+![Inventory-Page-Wireframe](./docs/screenshots/inv_wire.png)
+![Inventory-Page-Screen](./docs/screenshots/inv_screen.png)
 
 Search Page
-![Search-Page-Wireframe](docs/screenshots/search_wire.png)
-![Search-Page-Screen](docs/screenshots/search_screen.png)
+![Search-Page-Wireframe](./docs/screenshots/search_wire.png)
+![Search-Page-Screen](./docs/screenshots/search_screen.png)
 
 Mobile Pages
-![Mobile-Page-Wireframe](docs/screenshots/mobile_wire.png)
-![Mobile-Page-Screen](docs/screenshots/mobile_screen.jpg)
+![Mobile-Page-Wireframe](./docs/screenshots/mobile_wire.png)
+![Mobile-Page-Screen](./docs/screenshots/mobile_screen.jpg)
 
 
 ## High-Level Component Description
@@ -253,7 +253,7 @@ Better Lorem is a simple ruby gem that creates random strings of Lorem Ipsum tex
 
 ## Entity Relationship Diagram
 
-![Entity-Relationship-Diagram](docs/erd.png)
+![Entity-Relationship-Diagram](./docs/erd.png)
 
 ## Describe model relationships with eachother
 
@@ -335,8 +335,8 @@ Traders model generated with devise, but before migration the following fields w
 
 
 #### Roles:
-![Roles](docs//schema/roles_schema.png)
-![Roles-Joining](docs//schema/roles_joining_schema.png)
+![Roles](docs/schema/roles_schema.png)
+![Roles-Joining](docs/schema/roles_joining_schema.png)
 
 - The schema and migrations for roles and the joining table between roles and traders are generated through rolify.
 
@@ -346,7 +346,7 @@ Traders model generated with devise, but before migration the following fields w
 The one instance of the exchange that is used simply needs to be called ```"The Hermetic Exchange"```.
 
 #### Rifts:
-![Rifts](docs//schema/rifts_schema.png)
+![Rifts](docs/schema/rifts_schema.png)
 
 Rifts has a random Lorem Ipsum name, a random number of credits, and a reference to the Trader model that triggered its generation.
 
